@@ -1,5 +1,6 @@
 #include<iostream>
 #include<string>
+#include<vector>
 using namespace std;
 //int main()
 //{
@@ -99,64 +100,205 @@ using namespace std;
 //	string S = ("ab - cd");
 //};
 
-class Solution {
-public:
-	bool isPalindrome(string s)
-	{
-		if (s.empty())
-		{
-			return true;
-		}
-		int begin = 0;
-		int end = s.length() - 1;
+//class Solution {
+//public:
+//	bool isPalindrome(string s)
+//	{
+//		if (s.empty())
+//		{
+//			return true;
+//		}
+//		int begin = 0;
+//		int end = s.length() - 1;
+//
+//		while (begin<end)
+//		{
+//			while (begin<end)
+//			{
+//				if (IsNumberOrLetter(s[begin]))
+//				{
+//					break;
+//				}
+//				begin++;
+//			}
+//			while (begin<end)
+//			{
+//				if (IsNumberOrLetter(s[end]))
+//				{
+//					break;
+//				}
+//				end--;
+//			}
+//			if (begin<end)
+//			{
+//				if ((s[begin] + 32 - 'a') % 32 != (s[end] + 32 - 'a') % 32)
+//				{
+//					return false;
+//				}
+//				begin++;
+//				end--;
+//			}
+//		}
+//		return true;
+//	}
+//	bool IsNumberOrLetter(char c)
+//	{
+//		if ('0' <= c <= '9' ||
+//			'A' <= c <= 'Z' ||
+//			'a' <= c <= 'z')
+//		{
+//			return true;
+//		}
+//		return false;
+//	}
+//};
 
-		while (begin<end)
-		{
-			while (begin<end)
-			{
-				if (IsNumberOrLetter(s[begin]))
-				{
-					break;
-				}
-				begin++;
-			}
-			while (begin<end)
-			{
-				if (IsNumberOrLetter(s[end]))
-				{
-					break;
-				}
-				end--;
-			}
-			if (begin<end)
-			{
-				if ((s[begin] + 32 - 'a') % 32 != (s[end] + 32 - 'a') % 32)
-				{
-					return false;
-				}
-				begin++;
-				end--;
-			}
-		}
-		return true;
-	}
-	bool IsNumberOrLetter(char c)
-	{
-		if ('0' <= c <= '9' ||
-			'A' <= c <= 'Z' ||
-			'a' <= c <= 'z')
-		{
-			return true;
-		}
-		return false;
-	}
-};
-int main()
-{
-	Solution S1;
-	string S = ("ab - cd");
-	string s = "A man, a plan, a canal : Panama";
-	S1.isPalindrome(s);
-	cin.get();
-	return 0;
-}
+//字符串相加
+//class Solution {
+//public:
+//	string addStrings(string num1, string num2)
+//	{
+//		int end1 = num1.size() - 1;
+//		int end2 = num2.size() - 1;
+//		int value1 = 0, value2 = 0;
+//		//进位
+//		int next = 0;
+//		string addret;
+//		while (end1 >= 0 || end2 >= 0)
+//		{
+//			if (end1 >= 0)
+//			{
+//				value1 = num1[end1--] - '0';
+//			}
+//			else
+//				value1 = 0;
+//			if (end2 >= 0)
+//				value2 = num2[end2--] - '0';
+//			else
+//				value2 = 0;
+//			int valueret = value1 + value2 + next;
+//
+//			if (valueret >= 10)
+//			{
+//				valueret -= 10;
+//				next = 1;
+//			}
+//			else
+//			{
+//				next = 0;
+//			}
+//			addret += (valueret + '0');
+//		}
+//		if (next == 1)
+//		{
+//			addret += '1';
+//		}
+//		reverse(addret.begin(), addret.end());
+//		return addret;
+//	}
+//};
+
+//字符串相乘
+//class Solution {
+//public:
+//	string multiply(string num1, string num2)
+//	{
+//		vector<int> a, b, c;
+//		string ans;
+//		for (int i = 0; i<num1.size(); i++)
+//			a.push_back(num1[i] - '0');
+//		for (int i = 0; i<num2.size(); i++)
+//			b.push_back(num2[i] - '0');
+//		for (int i = 0; i<a.size(); i++)
+//		{
+//			for (int j = 0; j<b.size(); j++)
+//			{
+//				c[i + j] += a[i] * b[j];
+//			}
+//		}
+//		int index = c.size() - 1;
+//		int next = 0;
+//		while (index >= 0)
+//		{
+//			c[index] += next;
+//			next = c[index] / 10;
+//			c[index] %= 10;
+//			ans += (c[index] + '0');
+//		}
+//		return ans;
+//	}
+//};
+
+//输出字符串第一个只出现一次的字符
+//https://www.nowcoder.com/practice/e896d0f82f1246a3aa7b232ce38029d4?tpId=37&&tqId=21282&rp=1&ru=/activity/oj&qru=/ta/huawei/question-ranking
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//int main()
+//{
+//	string s;
+//	while (cin >> s)
+//	{
+//		bool isexit = false;
+//		char c;
+//		int count[256] = { 0 };
+//		int n = s.size();
+//		for (int i = 0; i<n; i++)
+//		{
+//			count[s[i]] += 1;
+//		}
+//		for (int i = 0; i<n; i++)
+//		{
+//			if (count[s[i]] == 1)
+//			{
+//				cout << s[i] << endl;
+//				isexit = true;
+//				break;
+//			}
+//		}
+//		if (isexit == false)
+//		{
+//			cout << -1 << endl;
+//		}
+//	}
+//	return 0;
+//}
+//int main()
+//{
+//	/*Solution S1;
+//	string S = ("ab - cd");
+//	string s = "A man, a plan, a canal : Panama";
+//	S1.isPalindrome(s);*/
+//	/*string s1 = "123";
+//	string s2 = "456";
+//	cout << s1 + s2 << endl;
+//	cout << 'a' + 'b' << endl;
+//	cout << s1 + '1' << endl;*/
+//	//Solution S;
+//	//string num1 = "9";
+//	//string num2 = "99";
+//	////cout<<S.addStrings(num1, num2)<<endl;
+//	//string a;
+//	//a += (8 + '0');
+//	//cout << a << endl;
+//	//a += (0 + '0');
+//	//cout << a << endl;
+//	//a = "123456";
+//	//reverse(a.begin(), a.end());
+//	//cout << 18 % 10 << endl;
+//	//cout << a << endl;
+//	/*vector<int> a;
+//	a.push_back(1);
+//	a.push_back(2);
+//	a.push_back(3);*/
+//	Solution s;
+//	string num1 = "123";
+//	string num2 = "456";
+//	s.multiply(num1, num2);
+//	cin.get();
+//	return 0;
+//}
+
+
+
+
