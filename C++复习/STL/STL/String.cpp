@@ -1,3 +1,5 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+
 #include<iostream>
 #include<string>
 #include<vector>
@@ -299,6 +301,68 @@ using namespace std;
 //	return 0;
 //}
 
+#include<stdio.h>
 
+//void   print(int  w)
+//{
+//	int  i;
+//	if (w != 0)
+//	{
+//		print(w - 1);
+//		for (i = 1; i <= w; ++i)
+//			printf(" % 3d, ", w);
+//		printf("\n");
+//	}
+//}
 
+//int main()
+//{
+//	int w = 4;
+//	print(w);
+//	cin.get();
+//	return 0;
+//}
 
+#include<string.h>
+//模拟实现string
+namespace my_string
+{
+	class string
+	{
+	public:
+		string(const char* str = " ")
+		{
+			//string s1();
+			if (str == nullptr)
+			{
+				//构造一个空的字符串
+				_str = new char[1];
+				*_str = '\0';
+				
+			}
+			else
+			{
+				_str = new char[strlen(str) + 1];
+				strcpy(_str, str);
+			}
+		}
+		~string()
+		{
+			if (_str != NULL)
+			{
+				delete[] _str;
+				_str = nullptr;
+			}
+		}
+	private:
+		char* _str;
+	};
+}
+
+int main()
+{
+	my_string::string s1 = "abc";
+	my_string::string s2();
+	cin.get();
+	return 0;
+}
