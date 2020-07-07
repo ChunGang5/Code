@@ -323,46 +323,93 @@ using namespace std;
 //	return 0;
 //}
 
-#include<string.h>
-//模拟实现string
-namespace my_string
-{
-	class string
-	{
-	public:
-		string(const char* str = " ")
-		{
-			//string s1();
-			if (str == nullptr)
-			{
-				//构造一个空的字符串
-				_str = new char[1];
-				*_str = '\0';
-				
-			}
-			else
-			{
-				_str = new char[strlen(str) + 1];
-				strcpy(_str, str);
-			}
-		}
-		~string()
-		{
-			if (_str != NULL)
-			{
-				delete[] _str;
-				_str = nullptr;
-			}
-		}
-	private:
-		char* _str;
-	};
-}
+//#include<string.h>
+//#include<algorithm>
+////模拟实现string
+//namespace my_string
+//{
+//	class string
+//	{
+//	public:
+//		string(const char* str = " ")
+//		{
+//			//string s1();
+//			if (str == nullptr)
+//			{
+//				//构造一个空的字符串
+//				_str = new char[1];
+//				*_str = '\0';
+//				
+//			}
+//			else
+//			{
+//				_str = new char[strlen(str) + 1];
+//				strcpy(_str, str);
+//			}
+//		}
+//
+//		/*string(const string&s)
+//			:_str(new char[strlen(s._str)+1])
+//		{
+//			strcpy(_str, s._str);
+//		}*/
+//		string(const string&s)
+//			:_str(nullptr)
+//		{
+//			string temp(s);
+//			//swap(_str, s._str);
+//		}
+//		//string& operator=(const string&s)
+//		//{
+//		//	if (this != &s)
+//		//	{
+//		//		char* PStr = new char[strlen(s._str) + 1];
+//		//		strcpy(PStr, s._str);
+//		//		//应该释放s1的空间，因为要给s1里面赋值拷贝。
+//		//		delete[] _str;
+//		//		_str = PStr;
+//		//	}
+//		//	return *this;
+//		//}
+//		string& operator =(const string&s)
+//		{
+//			if (this != &s)
+//			{
+//				string temp(s);
+//				//swap(_str, s._str);
+//			}
+//			return *this;
+//		}
+//		~string()
+//		{
+//			if (_str != NULL)
+//			{
+//				delete[] _str;
+//				_str = nullptr;
+//				size = 0;
+//				capacity = 0;
+//			}
+//		}
+//	private:
+//		char* _str;
+//		size_t size;
+//		size_t capacity;
+//	};
+//}
+//
+//int main()
+//{
+//	my_string::string s1 = "abc";
+//	my_string::string s2;
+//	my_string::string s3(s2);
+//	my_string::string s4 = "awdad";
+//	//拷贝
+//	my_string::string s5 = s1;
+//	//赋值
+//	s1 = s4;
+//	//cin.get();
+//	return 0;
+//}
 
-int main()
-{
-	my_string::string s1 = "abc";
-	my_string::string s2();
-	cin.get();
-	return 0;
-}
+
+
