@@ -27,5 +27,8 @@
     <ClCompile Include="Listt.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="栈和队列.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
