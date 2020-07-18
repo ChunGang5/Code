@@ -64,11 +64,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Listt.cpp" />
+    <ClCompile Include="map_set.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="Vector.cpp" />
-    <ClCompile Include="栈和队列.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
