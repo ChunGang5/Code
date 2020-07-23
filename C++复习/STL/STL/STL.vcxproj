@@ -66,6 +66,7 @@
   <ItemGroup>
     <ClCompile Include="AVLTree.cpp" />
     <ClCompile Include="map_set.cpp" />
+    <ClCompile Include="RBTree.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="Vector.cpp" />
