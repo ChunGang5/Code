@@ -239,11 +239,27 @@
 //};
 
 #include<iostream>
+#include<string>
 using namespace std;
-
 int main()
 {
-	
+	string s1;
+	string s2;
+	while (getline(cin,s1))
+	{
+		getline(cin, s2);
+		int count = 0;
+		while (!s1.empty())
+		{
+			size_t pos = s1.rfind(s2);
+			if (pos != string::npos)
+			{
+				count++;
+				s1 = s1.substr(0,pos);
+			}
+		}
+		cout << count<<endl;
+	}
 	cin.get();
 	return 0;
 }
