@@ -239,27 +239,173 @@
 //};
 
 #include<iostream>
-#include<string>
+#include<map>
+#include<vector>
 using namespace std;
+//class Solution {
+//public:
+//	int MoreThanHalfNum_Solution(vector<int> numbers)
+//	{
+//		if (0 == numbers.size())
+//		{
+//			return 0;
+//		}
+//		int result = numbers[0];
+//		int times = 1;
+//		for (int i = 1; i<numbers.size(); i++)
+//		{
+//			if (times == 0)
+//			{
+//				result = numbers[i];
+//				times++;
+//			}
+//			else if (result == numbers[i])
+//			{
+//				times++;
+//			}
+//			else
+//			{
+//				times--;
+//			}
+//		}
+//		int count = 0;
+//		for (int i = 0; i<numbers.size(); i++)
+//		{
+//			if (result == numbers[i])
+//				count++;
+//		}
+//		return count>numbers.size() / 2 ? result : 0;
+//	}
+//};
+//class Solution {
+//public:
+//	int MoreThanHalfNum_Solution(vector<int> numbers)
+//	{
+//		map<int, int>mp;
+//		int sz = numbers.size();
+//		for (int i = 0; i<sz; i++)
+//		{
+//			if (mp.find(numbers[i]) == mp.end())
+//			{
+//				mp.insert(make_pair(numbers[i], 1));
+//			}
+//			else
+//			{
+//				mp[numbers[i]]++;
+//			}
+//			if (mp[numbers[i]]>(sz / 2))
+//			{
+//				return numbers[i];
+//			}
+//		}
+//		return 0;
+//	};
+#include<algorithm>
 int main()
 {
-	string s1;
-	string s2;
-	while (getline(cin,s1))
+	vector<int> numbers{ 1, 2, 3, 2, 2, 2, 5, 4, 2 };
+	sort(numbers.begin(), numbers.end());
+	int len = numbers.size();
+	int targer = numbers[len / 2];
+	int sz = 0;
+	for (int i = 0; i<len; i++)
 	{
-		getline(cin, s2);
-		int count = 0;
-		while (!s1.empty())
+		int ret = numbers[i];
+		if (numbers[i] == targer);
 		{
-			size_t pos = s1.rfind(s2);
-			if (pos != string::npos)
-			{
-				count++;
-				s1 = s1.substr(0,pos);
-			}
+			sz++;
 		}
-		cout << count<<endl;
+	}
+	if (sz>(len / 2))
+	{
+		cout<< targer<<endl;
 	}
 	cin.get();
+	cout << 0 << endl;
 	return 0;
 }
+
+
+/*class Solution {
+public:
+int MoreThanHalfNum_Solution(vector<int> numbers)
+{
+unordered_map<int,int> map;
+int half=numbers.size()/2;
+for(int i=0;i<numbers.size();i++)
+{
+auto it=map.find(numbers[i]);
+if(it!=map.end())
+{
+map[numbers[i]]++;
+}
+else
+{
+map.insert(make_pair(numbers[i],1));
+}
+if(map[numbers[i]]>half)
+{
+return numbers[i];
+}
+}
+return 0;
+}
+};*/
+
+/*class Solution {
+public:
+int MoreThanHalfNum_Solution(vector<int> numbers)
+{
+sort(numbers.begin(),numbers.end());
+int targer=numbers[numbers.size()/2];
+int count=0;
+for(int i=0;i<numbers.size();i++)
+{
+if(numbers[i]==targer)
+{
+count++;
+}
+}
+if(count>numbers.size()/2)
+{
+return targer;
+}
+return 0;
+}
+};*/
+
+//class Solution {
+//public:
+//	int MoreThanHalfNum_Solution(vector<int> numbers)
+//	{
+//		if (0 == numbers.size())
+//		{
+//			return 0;
+//		}
+//		int result = numbers[0];
+//		int times = 1;
+//		for (int i = 1; i<numbers.size(); i++)
+//		{
+//			if (times == 0)
+//			{
+//				result = numbers[i];
+//				times++;
+//			}
+//			else if (result == numbers[i])
+//			{
+//				times++;
+//			}
+//			else
+//			{
+//				times--;
+//			}
+//		}
+//		int count = 0;
+//		for (int i = 0; i<numbers.size(); i++)
+//		{
+//			if (result == numbers[i])
+//				count++;
+//		}
+//		return count>numbers.size() / 2 ? result : 0;
+//	}
+//}
