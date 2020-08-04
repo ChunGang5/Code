@@ -300,30 +300,30 @@ using namespace std;
 //		}
 //		return 0;
 //	};
-#include<algorithm>
-int main()
-{
-	vector<int> numbers{ 1, 2, 3, 2, 2, 2, 5, 4, 2 };
-	sort(numbers.begin(), numbers.end());
-	int len = numbers.size();
-	int targer = numbers[len / 2];
-	int sz = 0;
-	for (int i = 0; i<len; i++)
-	{
-		int ret = numbers[i];
-		if (numbers[i] == targer);
-		{
-			sz++;
-		}
-	}
-	if (sz>(len / 2))
-	{
-		cout<< targer<<endl;
-	}
-	cin.get();
-	cout << 0 << endl;
-	return 0;
-}
+//#include<algorithm>
+//int main()
+//{
+//	vector<int> numbers{ 1, 2, 3, 2, 2, 2, 5, 4, 2 };
+//	sort(numbers.begin(), numbers.end());
+//	int len = numbers.size();
+//	int targer = numbers[len / 2];
+//	int sz = 0;
+//	for (int i = 0; i<len; i++)
+//	{
+//		int ret = numbers[i];
+//		if (numbers[i] == targer);
+//		{
+//			sz++;
+//		}
+//	}
+//	if (sz>(len / 2))
+//	{
+//		cout<< targer<<endl;
+//	}
+//	cin.get();
+//	cout << 0 << endl;
+//	return 0;
+//}
 
 
 /*class Solution {

@@ -119,3 +119,26 @@ https://www.nowcoder.com/practice/abc3fe2ce8e146608e868a70efebf62e?tpId=13&tqId=
 //	}
 //};
 
+#include<iostream>
+using namespace std;
+class A
+{
+public:
+	int a;
+	int b;
+};
+class B:public A
+{
+public:
+	int a;
+	int c;
+};
+int main()
+{
+	B b;
+	b.a = 10;
+	cout << b.a << endl;
+	cout << b.A::a << endl;
+	cin.get();
+	return 0;
+}
