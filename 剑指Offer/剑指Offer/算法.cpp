@@ -119,26 +119,63 @@ https://www.nowcoder.com/practice/abc3fe2ce8e146608e868a70efebf62e?tpId=13&tqId=
 //	}
 //};
 
-#include<iostream>
-using namespace std;
-class A
-{
+/*我们可以用2*1的小矩形横着或者竖着去覆盖更大的矩形。请问用n个2*1的小矩形无重叠地覆盖一个2*n的大矩形，总共有多少种方法？
+https://www.nowcoder.com/practice/72a5a919508a4251859fb2cfb987a0e6?
+tpId = 13 & tqId = 11163 & tPage = 1 & rp = 1 & ru = / ta / coding - interviews&qru = / ta / coding - interviews / questionranking
+class Solution {
 public:
-	int a;
-	int b;
-};
-class B:public A
-{
+	int rectCover(int number)
+	{
+		//设定状态f(n)表示n个方块放的方法
+		//2、推导状态转移方程 f(n)=f(n-2)+f(n-1)
+		//3、设置边界
+		int *dp = new int[number + 1];
+		dp[1] = 1;
+		dp[2] = 2;
+		for (int i = 3; i <= number; i++)
+		{
+			dp[i] = dp[i - 2] + dp[i - 1];
+		}
+		int result = dp[number];
+		delete[]dp;
+		return result;
+	}
+};*/
+
+/*
+输入一个整数，输出该数32位二进制表示中1的个数。其中负数用补码表示。
+https://www.nowcoder.com/practice/8ee967e43c2c4ec193b040ea7fbb10b8?
+class Solution {
 public:
-	int a;
-	int c;
-};
-int main()
+int  NumberOf1(int n)
 {
-	B b;
-	b.a = 10;
-	cout << b.a << endl;
-	cout << b.A::a << endl;
-	cin.get();
-	return 0;
+int count=0;
+int flag=1;
+while(flag)
+{
+if(n&flag)
+{
+++count;
 }
+flag=flag<<1;
+}
+return count;
+}
+};
+
+//解法二：n=(n-1)&n;消一位1；
+class Solution {
+public:
+	int  NumberOf1(int n)
+	{
+		int count = 0;
+		while (n)
+		{
+			++count;
+			n = (n - 1)&n;
+		}
+		return count;
+	}
+};*/
+
+
