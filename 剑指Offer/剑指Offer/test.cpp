@@ -409,3 +409,20 @@ return 0;
 //		return count>numbers.size() / 2 ? result : 0;
 //	}
 //}
+
+
+
+
+
+#include<unordered_map>
+
+int main()
+{
+	unordered_map<int, int> mp;
+	mp.insert(make_pair(1, 1));
+	mp.insert(make_pair(2, 2));
+	for (auto it = mp.begin(); it != mp.end(); ++it)
+	{
+		(*it).
+	}
+}
