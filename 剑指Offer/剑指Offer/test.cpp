@@ -414,15 +414,54 @@ return 0;
 
 
 
-#include<unordered_map>
-
-int main()
-{
-	unordered_map<int, int> mp;
-	mp.insert(make_pair(1, 1));
-	mp.insert(make_pair(2, 2));
-	for (auto it = mp.begin(); it != mp.end(); ++it)
-	{
-		(*it).
-	}
+/*
+输入两棵二叉树A，B，判断B是不是A的子结构。（ps：我们约定空树不是任意一个树的子结构）
+https://www.nowcoder.com/practice/6e196c44c7004d15b1610b9afca8bd88?tpId=13&&tqId=11170&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+struct TreeNode {
+int val;
+struct TreeNode *left;
+struct TreeNode *right;
+TreeNode(int x) :
+val(x), left(NULL), right(NULL) {
 }
+};
+class Solution {
+public:
+	bool IsSubTree(TreeNode *Root, TreeNode *SubRoot)
+	{
+		if (SubRoot == NULL)    //子树已经没有节点了，比较完了
+		{
+			return true;
+		}
+		if (Root == NULL)    //子树没有比较完，但是主树比较完了
+		{
+			return false;
+		}
+		if (Root->val != SubRoot->val)
+		{
+			return false;
+		}
+		return IsSubTree(Root->left, SubRoot->left) && IsSubTree(Root->right, SubRoot->right);
+	}
+	bool HasSubtree(TreeNode* pRoot1, TreeNode* pRoot2)
+	{
+		if (pRoot1 == NULL || pRoot2 == NULL)
+		{
+			return false;
+		}
+		bool result = false;
+		if (pRoot1->val == pRoot2->val) //找到起始节点
+		{
+			result = IsSubTree(pRoot1, pRoot2);
+		}
+		if (!result)
+		{
+			result = HasSubtree(pRoot1->left, pRoot2);
+		}
+		if (!result)
+		{
+			result = HasSubtree(pRoot1->right, pRoot2);
+		}
+		return result;
+	}
+};*/
