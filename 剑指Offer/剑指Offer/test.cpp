@@ -465,3 +465,286 @@ public:
 		return result;
 	}
 };*/
+
+
+/*
+操作给定的二叉树，将其变换为源二叉树的镜像
+https://www.nowcoder.com/practice/564f4c26aa584921bc75623e48ca3011?tpId=13&&tqId=11171&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+struct TreeNode {
+int val;
+struct TreeNode *left;
+struct TreeNode *right;
+TreeNode(int x) :
+val(x), left(NULL), right(NULL) {
+}
+};
+class Solution {
+public:
+	void Mirror(TreeNode *pRoot)
+	{
+		if (pRoot == NULL)
+			return;
+		if (pRoot->left == NULL&&pRoot->right == NULL)
+		{
+			return;
+		}
+		//交换左右节点
+		TreeNode *pTemp = pRoot->left;
+		pRoot->left = pRoot->right;
+		pRoot->right = pTemp;
+		if (pRoot->left)
+		{
+			Mirror(pRoot->left);
+		}
+		if (pRoot->right)
+		{
+			Mirror(pRoot->right);
+		}
+	}
+};*/
+
+/*
+在一个排序的链表中，存在重复的结点，请删除该链表中重复的结点，重复的结点不保留，返回链表头指针。 例如，链表1->2->3->3->4->4->5 处理后为 1->2->5
+https://www.nowcoder.com/practice/fc533c45b73a41b0b44ccba763f866ef?
+struct ListNode {
+int val;
+struct ListNode *next;
+ListNode(int x) :
+val(x), next(NULL) {
+}
+};
+
+class Solution {
+public:
+	ListNode* deleteDuplication(ListNode* pHead)
+	{
+		if (pHead == NULL || pHead->next == NULL)
+		{
+			return pHead;
+		}
+		//考虑到可能全部重复
+		ListNode *head = new ListNode(0);
+		head->next = pHead;
+		ListNode *prev = head;
+		ListNode *last = prev->next;
+		//这样做虽然代码过去了，但是还存在着内存泄漏
+		while (last != NULL)
+		{
+			while (last->next != NULL&& last->val != last->next->val)
+			{
+				prev = prev->next;
+				last = last->next;
+			}
+			while (last->next != NULL&&last->val == last->next->val)
+			{
+				last = last->next;
+			}
+			if (prev->next != last)
+			{
+				prev->next = last->next;
+			}
+			last = last->next;
+		}
+		return head->next;
+	}
+};
+*/
+
+/*
+定义栈的数据结构，请在该类型中实现一个能够得到栈中所含最小元素的min函数（时间复杂度应为O（1））。
+https://www.nowcoder.com/practice/4c776177d2c04c2494f2555c9fcc1e49?tpId=13&&tqId=11173&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+class Solution {
+public:
+	void push(int value)
+	{
+		DataStack.push(value);
+		if (MinStack.size() == 0 || value<MinStack.top())
+		{
+			MinStack.push(value);
+		}
+		else    //最小栈元素数应与数据栈元素数一致
+		{
+			MinStack.push(MinStack.top());
+		}
+	}
+	void pop()
+	{
+		if (DataStack.size()>0 && MinStack.size()>0)
+		{
+			DataStack.pop();
+			MinStack.pop();
+		}
+	}
+	int top()
+	{
+		return DataStack.top();
+	}
+	int min()
+	{
+		return MinStack.top();
+	}
+private:
+	stack<int> MinStack;
+	stack<int> DataStack;
+};
+*/
+
+
+/*
+输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否可能为该栈的弹出顺序。
+假设压入栈的所有数字均不相等。例如序列1, 2, 3, 4, 5是某栈的压入顺序，序列4, 5, 3, 2, 1是该压栈序列对应的一个弹出序列，
+但4, 3, 5, 1, 2就不可能是该压栈序列的弹出序列。（注意：这两个序列的长度是相等的）
+class Solution {
+public:
+	bool IsPopOrder(vector<int> pushV, vector<int> popV)
+	{
+		if (pushV.size() == 0 || popV.size() == 0 || pushV.size() != popV.size())
+		{
+			return false;
+		}
+		stack<int> st;
+		int PushIndex = 0;
+		int PopIndex = 0;
+		while (PushIndex<pushV.size())
+		{
+			st.push(pushV[PushIndex]);
+			while (!st.empty() && st.top() == popV[PopIndex])
+			{
+				st.pop();
+				++PopIndex;
+			}
+			++PushIndex;
+		}
+		//如果最后st为空，则弹出顺序是对的
+		return st.empty();
+	}
+};
+*/
+
+
+/*
+从上往下打印出二叉树的每个节点，同层节点从左至右打印。
+https://www.nowcoder.com/practice/7fe2212963db4790b57431d9ed259701?tpId=13&&tqId=11175&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+struct TreeNode {
+int val;
+struct TreeNode *left;
+struct TreeNode *right;
+TreeNode(int x) :
+val(x), left(NULL), right(NULL) {
+}
+};
+class Solution {
+public:
+	vector<int> PrintFromTopToBottom(TreeNode* root)
+	{
+		vector<int> result;
+		if (root == NULL)
+		{
+			return result;
+		}
+		queue<TreeNode*> q;
+		q.push(root);
+		while (!q.empty())
+		{
+			TreeNode *tmp = q.front();
+			q.pop();
+			result.push_back(tmp->val);
+			if (tmp->left)
+			{
+				q.push(tmp->left);
+			}
+			if (tmp->right)
+			{
+				q.push(tmp->right);
+			}
+		}
+		return result;
+	}
+};
+*/
+
+/*
+输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果。如果是则输出Yes, 否则输出No。
+假设输入的数组的任意两个数字都互不相同。
+https://www.nowcoder.com/practice/a861533d45854474ac791d90e447bafd?tpId=13&&tqId=11176&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+class Solution {
+public:
+	bool IsSquenceOfBST(vector<int> sequence, int start, int end)
+	{
+		//找完了或者就剩一个，那个就是根节点
+		if (start >= end)
+		{
+			return true;
+		}
+		int root = sequence[end];
+		int i = 0;
+		//划分左子树范围
+		for (; i<end; ++i)
+		{
+			if (sequence[i]>root)
+				break;
+		}
+		int j = i;
+		for (; j<end; ++j)
+		{
+			if (sequence[j]<root)    //左子树里有比根节点大的，或者右子树里有比根节点小的
+				return false;
+		}
+		return IsSquenceOfBST(sequence, 0, i - 1) && IsSquenceOfBST(sequence, i, end - 1);
+	}
+	bool VerifySquenceOfBST(vector<int> sequence)
+	{
+		if (sequence.empty())
+		{
+			return false;
+		}
+		return IsSquenceOfBST(sequence, 0, sequence.size() - 1);
+	}
+};
+*/
+
+
+
+/*
+输入一颗二叉树的根节点和一个整数，按字典序打印出二叉树中结点值的和为输入整数的所有路径。路径定义为从树的根结点开始往下一直到叶结点所经过的结点形成一条路径。
+https://www.nowcoder.com/practice/b736e784e3e34731af99065031301bca?tpId=13&&tqId=11177&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+struct TreeNode {
+int val;
+struct TreeNode *left;
+struct TreeNode *right;
+TreeNode(int x) :
+val(x), left(NULL), right(NULL) {
+}
+};
+class Solution {
+public:
+	void DFSFindPath(TreeNode *root, int expectNumber, vector<vector<int>> &result, vector<int> &path)
+	{
+		//递归终止条件
+		if (root == NULL)
+		{
+			return;
+		}
+		path.push_back(root->val);
+		expectNumber -= root->val;
+		if (root->left == NULL && root->right == NULL && expectNumber == 0)
+		{
+			result.push_back(path);
+		}
+		DFSFindPath(root->left, expectNumber, result, path);
+		DFSFindPath(root->right, expectNumber, result, path);
+
+		//这个root节点遍历完了，就要删除这个节点，回退了
+		path.pop_back();
+		//不用再减去什么了，因为函数递归回去了，expectNumber是栈上的空间，回调回去就自动释放了
+		//用原来的expectNumber,不像result和path
+	}
+	vector<vector<int> > FindPath(TreeNode* root, int expectNumber)
+	{
+		vector<vector<int>> result;
+		vector<int> path;
+		DFSFindPath(root, expectNumber, result, path);
+		return result;
+	}
+};
+*/
