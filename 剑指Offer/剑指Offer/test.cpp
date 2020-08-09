@@ -748,3 +748,118 @@ public:
 	}
 };
 */
+
+
+/*
+输入一个字符串, 按字典序打印出该字符串中字符的所有排列。例如输入字符串abc, 
+则按字典序打印出由字符a, b, c所能排列出来的所有字符串abc, acb, bac, bca, cab和cba。
+https://www.nowcoder.com/practice/fe6b651b66ae47d7acce78ffdd9a96c7?tpId=13&&tqId=11180&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+class Solution {
+public:
+	void Swap(string &str, int i, int j)
+	{
+		char temp = str[i];
+		str[i] = str[j];
+		str[j] = temp;
+	}
+	void PermutetationHelper(string &str, int start, vector<string> &result)
+	{
+		//插入
+		if (start == str.length() - 1)
+		{//先去重
+			bool flag = false;
+			auto it = result.begin();
+			for (; it != result.end(); ++it)
+			{
+				if (*it == str)
+				{
+					flag = true;
+				}
+			}
+			if (flag == false)
+			{
+				result.push_back(str);
+			}
+			return;
+		}
+		//start代表头号位置的元素，以i的变化，改变start位置元素
+		for (int i = start; i<str.size(); i++)
+		{
+			Swap(str, start, i);
+			PermutetationHelper(str, start + 1, result);
+			Swap(str, start, i);
+		}
+	}
+	vector<string> Permutation(string str)
+	{
+		vector<string> result;
+		if (str.empty())
+		{
+			return result;
+		}
+		PermutetationHelper(str, 0, result);
+		//sort默认为ASCII值排序，因为题意要以字典序打印出所有排列
+		sort(result.begin(), result.end());
+		return result;
+	}
+};
+*/
+
+
+/*
+输入n个整数，找出其中最小的K个数。例如输入4,5,1,6,2,7,3,8这8个数字，则最小的4个数字是1,2,3,4。
+https://www.nowcoder.com/practice/6a296eb82cf844ca8539b57c23e6e9bf?tpId=13&&tqId=11182&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+解法一：直接排序时间复杂度比较复杂快排加？
+class Solution {
+public:
+vector<int> GetLeastNumbers_Solution(vector<int> input, int k)
+{
+vector<int> result;
+if(input.empty()||input.size()<k)
+{
+return result;
+}
+sort(input.begin(),input.end());
+for(auto i=0;i<k;i++)
+{
+result.push_back(input[i]);
+}
+return result;
+}
+};
+//解法二：
+class Solution {
+public:
+	vector<int> GetLeastNumbers_Solution(vector<int> input, int k)
+	{
+		vector<int> result;
+		if (k<1 || input.empty() || input.size()<k)
+		{
+			return result;
+		}
+		//默认大堆，小堆的话要设置greater
+		priority_queue<int, vector<int>> q;
+		for (int i = 0; i<input.size(); ++i)
+		{
+			if (i<k)
+			{
+				q.push(input[i]);
+			}
+			else
+			{
+				if (input[i]<q.top())
+				{
+					q.pop();
+					q.push(input[i]);
+				}
+			}
+		}
+		for (int i = 0; i<k; i++)
+		{
+			result.push_back(q.top());
+			q.pop();
+		}
+		return result;
+	}
+};
+*/
