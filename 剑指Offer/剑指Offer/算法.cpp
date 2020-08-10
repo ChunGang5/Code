@@ -179,3 +179,221 @@ public:
 };*/
 
 
+/*给定一个仅由小写字母组成的字符串。现在请找出一个位置，删掉那个字母之后，字符串变成回文。请放心总会有一个合法的解。
+如果给定的字符串已经是一个回文串，那么输出-1。给定一个仅由小写字母组成的字符串。现在请找出一个位置，删掉那个字母之后，字符串变成回文。
+请放心总会有一个合法的解。如果给定的字符串已经是一个回文串，那么输出-1。
+https://www.nowcoder.com/practice/b6edb5ca15d34b1eb42e4725a3c68eba?https://www.nowcoder.com/practice/b6edb5ca15d34b1eb42e4725a3c68eba?
+#include<iostream>
+#include<string>
+using namespace std;
+bool IsPalindrome(string &s, int *start, int *end)
+{
+	int i = 0;
+	int j = s.size() - 1;
+	bool flag = true;
+	while (i <= j)
+	{
+		if (s[i] != s[j])
+		{
+			flag = false;
+			break;
+		}
+		++i;
+		--j;
+	}
+	if (start != NULL)    *start = i;
+	if (end != NULL)    *end = j;
+	return flag;
+}
+int main()
+{
+	int T = 0;
+	cin >> T;
+	while (T)
+	{
+		string s;
+		cin >> s;
+		int start = 0;
+		int end = s.length() - 1;
+		if (IsPalindrome(s, &start, &end))
+		{
+			cout << "-1" << endl;
+		}
+		else
+		{
+			s.erase(end, 1);
+			if (IsPalindrome(s, NULL, NULL))
+			{
+				cout << end << endl;
+			}
+			else
+			{
+				cout << start << endl;
+			}
+		}
+		--T;
+	}
+}
+*/
+
+/*输入一个正整数数组，把数组里所有数字拼接起来排成一个数，打印能拼接出的所有数字中最小的一个。例如输入数组{3，32，321}，则打印出这三个数字能排成的最小数字为321323。
+https://www.nowcoder.com/practice/8fecd3f8ba334add803bf2a06af1b993?tpId=13&&tqId=11185&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+class Solution {
+public:
+	static bool cmp(int x, int y)
+	{
+		string Sx = to_string(x);
+		string Sy = to_string(y);
+		string S1 = Sx;
+		S1 += Sy;
+		string S2 = Sy;
+		S2 += Sx;
+		return S1<S2;
+	}
+	string PrintMinNumber(vector<int> numbers)
+	{
+		//按字典序比较大小，排序
+		sort(numbers.begin(), numbers.end(), cmp);
+		string result = "";
+		for (int i = 0; i<numbers.size(); ++i)
+		{
+			result += to_string(numbers[i]);
+		}
+		return result;
+	}
+};
+*/
+
+/*
+struct TreeNode {
+int val;
+struct TreeNode *left;
+struct TreeNode *right;
+TreeNode(int x) :
+val(x), left(NULL), right(NULL) {
+}
+};*/
+
+/*class Solution {
+	public:
+	void TreeDepthCore(TreeNode *pRoot,int depth,int &count)
+	{
+		if(pRoot==NULL)
+		{
+			if(depth>count)
+			{
+				count=depth;
+			}
+			return;
+		}
+		TreeDepthCore(pRoot->left,depth+1, count);
+		TreeDepthCore(pRoot->right,depth+1, count);
+	}
+	int TreeDepth(TreeNode* pRoot)
+	{
+		if(pRoot==NULL)
+		{
+			return 0;
+		}
+		int count =0;
+		int depth=0;
+		TreeDepthCore(pRoot, depth, count);
+		return count;
+	}
+};
+
+
+class Solution {
+public:
+int TreeDepth(TreeNode* pRoot)
+{
+	if(pRoot==NULL)
+	{
+		return 0;
+	}
+	return 1+max(TreeDepth(pRoot->left),TreeDepth(pRoot->right));
+}
+};
+
+//层序遍历求深度
+class Solution {
+public:
+	int TreeDepth(TreeNode* pRoot)
+	{
+		if (pRoot == NULL)
+		{
+			return 0;
+		}
+		queue<TreeNode*> q;
+		q.push(pRoot);
+		int depth = 0;
+		while (!q.empty())
+		{
+			++depth;
+			int size = q.size();
+			for (int i = 0; i<size; i++)
+			{
+				TreeNode *cur = q.front();
+				q.pop();
+				if (cur->left)
+				{
+					q.push(cur->left);
+				}
+				if (cur->right)
+				{
+					q.push(cur->right);
+				}
+			}
+		}
+		return depth;
+	}
+};
+*/
+
+/*一个整型数组里除了两个数字之外，其他的数字都出现了两次。请写程序找出这两个只出现一次的数字。
+https://www.nowcoder.com/practice/e02fdb54d7524710a7d664d082bb7811?tpId=13&&tqId=11193&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+class Solution {
+public:
+	void FindNumsAppearOnce(vector<int> data, int* num1, int *num2)
+	{
+		if (data.size() == 0 || num1 == NULL || num2 == NULL)
+		{
+			return;
+		}
+		//1.整体异或
+		int result = data[0];
+		for (int i = 1; i<data.size(); ++i)
+		{
+			result ^= data[i];
+		}
+		if (result == 0)
+			return;
+		//2、找到其某一个位为1的位的位置，这就可以将数据分成两组了
+		int flag = 1;
+		int len = sizeof(int)* 8;
+		for (int i = 0; i<len; i++)
+		{
+			//先&后左移
+			if ((flag << i)&result)
+			{
+				flag <<= i;
+				break;
+			}
+		}
+		//3、由找到的为1的比特位进行划分，就能把两个只出现一次的数字分为两组
+		*num1 = 0;
+		*num2 = 0;
+		for (int i = 0; i<data.size(); ++i)
+		{
+			if (data[i] & flag)
+			{
+				*num1 ^= data[i];
+			}
+			else
+			{
+				*num2 ^= data[i];
+			}
+		}
+	}
+};
+*/
