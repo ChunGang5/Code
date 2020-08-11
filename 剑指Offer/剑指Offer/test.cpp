@@ -866,58 +866,71 @@ public:
 
 #include<iostream>
 using namespace std;
-class Solution {
-public:
-	void FindNumsAppearOnce(vector<int> data, int* num1, int *num2)
-	{
-		if (data.size() == 0 || num1 == NULL || num2 == NULL)
-		{
-			return;
-		}
-		//1.整体异或
-		int result = data[0];
-		for (auto i = 1; i<data.size(); ++i)
-		{
-			result ^= data[i];
-		}
-		if (result == 0)
-			return;
-		//2、找到其某一个位为1的位的位置，这就可以将数据分成两组了
-		int flag = 1;
-		int len = sizeof(int)* 8;
-		for (int i = 0; i<len; i++)
-		{
-			//先&后左移
-			if ((flag << i)&result)
-			{
-				flag <<= i;
-				break;
-			}
-		}
-		//3、由找到的为1的比特位进行划分，就能把两个只出现一次的数字分为两组
-		int a=*num1 = 0;
-		int b=*num2 = 0;
-		for (int i = 0; i<data.size(); ++i)
-		{
-			if (data[i] & flag)
-			{
-				*num1 ^= data[i];
-			}
-			else
-			{
-				*num2 ^= data[i];
-			}
-		}
-	}
-};
+//class Solution {
+//public:
+//	void FindNumsAppearOnce(vector<int> data, int* num1, int *num2)
+//	{
+//		if (data.size() == 0 || num1 == NULL || num2 == NULL)
+//		{
+//			return;
+//		}
+//		//1.整体异或
+//		int result = data[0];
+//		for (auto i = 1; i<data.size(); ++i)
+//		{
+//			result ^= data[i];
+//		}
+//		if (result == 0)
+//			return;
+//		//2、找到其某一个位为1的位的位置，这就可以将数据分成两组了
+//		int flag = 1;
+//		int len = sizeof(int)* 8;
+//		for (int i = 0; i<len; i++)
+//		{
+//			//先&后左移
+//			if ((flag << i)&result)
+//			{
+//				flag <<= i;
+//				break;
+//			}
+//		}
+//		//3、由找到的为1的比特位进行划分，就能把两个只出现一次的数字分为两组
+//		int a=*num1 = 0;
+//		int b=*num2 = 0;
+//		for (int i = 0; i<data.size(); ++i)
+//		{
+//			if (data[i] & flag)
+//			{
+//				*num1 ^= data[i];
+//			}
+//			else
+//			{
+//				*num2 ^= data[i];
+//			}
+//		}
+//	}
+//};
+//int main()
+//{
+//	Solution s;
+//	vector<int> data = { 2, 4, 3, 6, 3, 2, 5, 5 };
+//	int num1;
+//	int num2;
+//	s.FindNumsAppearOnce(data, &num1, &num2);
+//	cout << num1 <<num2<< endl;
+//	cin.get();
+//	return 0;
+//}
+
+
+#include<vector>
 int main()
 {
-	Solution s;
-	vector<int> data = { 2, 4, 3, 6, 3, 2, 5, 5 };
-	int num1;
-	int num2;
-	s.FindNumsAppearOnce(data, &num1, &num2);
-	cout << num1 <<num2<< endl;
+	vector<vector<int>> v = { { 1, 2 }, { 3, 4 } };
+	cout << v.size() << endl;
+	int n = 2;
+	n %= 6;
+	cout << n << endl;
 	cin.get();
 	return 0;
 }

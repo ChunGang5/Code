@@ -397,3 +397,309 @@ public:
 	}
 };
 */
+
+/*输入一个递增排序的数组和一个数字S，在数组中查找两个数，使得他们的和正好是S，如果有多对数字的和等于S，输出两个数的乘积最小的。
+https://www.nowcoder.com/practice/390da4f7a00f44bea7c2f3d19491311b?tpId=13&&tqId=11195&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+class Solution {
+public:
+	vector<int> FindNumbersWithSum(vector<int> array, int sum)
+	{
+		vector<int> result;
+		if (array.size()<2)
+		{
+			return result;
+		}
+		int i = 0;
+		int j = array.size() - 1;
+		//这块不用考虑乘积，两个数字离的越远，乘积越小，而且数列是升序排列的
+		while (i<j)
+		{
+			long long curSum = array[i] + array[j];
+			if (curSum == sum)
+			{
+				result.push_back(array[i]);
+				result.push_back(array[j]);
+				break;
+			}
+			else if (curSum>sum)
+			{
+				j--;
+			}
+			else
+			{
+				i++;
+			}
+		}
+		return result;
+	}
+};
+*/
+
+
+/*
+小明很喜欢数学,有一天他在做数学作业时,要求计算出9~16的和,他马上就写出了正确答案是100。
+但是他并不满足于此,他在想究竟有多少种连续的正数序列的和为100(至少包括两个数)。
+没多久,他就得到另一组连续正数和为100的序列:18,19,20,21,22。现在把问题交给你,
+你能不能也很快的找出所有和为S的连续正数序列? Good Luck!
+https://www.nowcoder.com/practice/c451a3fd84b64cb19485dad758a55ebe?tpId=13&&tqId=11194&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+class Solution {
+public:
+	vector<vector<int> > FindContinuousSequence(int sum)
+	{
+		vector<vector<int>> result;
+		if (sum <= 0)
+		{
+			return result;
+		}
+		int start = 1;
+		int end = 2;
+		while (start<end)
+		{
+			//等差数列求和公式：（a1+an)*n/2
+			int total = (start + end)*(end - start + 1) / 2;
+			if (total == sum)
+			{
+				vector<int> v;
+				for (int i = start; i <= end; i++)
+				{
+					v.push_back(i);
+				}
+				result.push_back(v);
+				//这块要重新开始新序列了
+				start++;
+			}
+			else if (total>sum)
+			{
+				start++;
+			}
+			else
+			{
+				end++;
+			}
+		}
+		return result;
+	}
+};
+*/
+
+
+/*牛客最近来了一个新员工Fish，每天早晨总是会拿着一本英文杂志，写些句子在本子上。
+同事Cat对Fish写的内容颇感兴趣，有一天他向Fish借来翻看，但却读不懂它的意思。
+例如，“student. a am I”。后来才意识到，这家伙原来把句子单词的顺序翻转了，正确的句子应该是“I am a student.”。
+Cat对一一的翻转这些单词顺序可不在行，你能帮助他么？
+https://www.nowcoder.com/practice/3194a4f4cf814f63919d0790578d51f3?tpId=13&&tqId=11197&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+class Solution {
+public:
+	void ReverseWord(string &str, int begin, int end)
+	{
+		while (begin<end)
+		{
+			swap(str[begin++], str[end--]);
+		}
+	}
+	string ReverseSentence(string str)
+	{
+		if (str.empty())
+		{
+			return str;
+		}
+		int begin = 0;
+		int end = str.size() - 1;
+		//整体反转
+		ReverseWord(str, begin, end);
+		int i = 0;
+		while (i<str.size())
+		{
+			//跳过刚开头的空格
+			while (str[i] == ' '&&i<str.size())
+			{
+				i++;
+			}
+			begin = end = i;
+			//找寻单词的区间
+			while (i<str.size() && str[i] != ' ')
+			{
+				i++;
+				end++;
+			}
+			end--;
+			ReverseWord(str, begin, end);
+		}
+		return str;
+	}
+};
+*/
+
+
+/*
+汇编语言中有一种移位指令叫做循环左移（ROL），现在有个简单的任务，就是用字符串模拟这个指令的运算结果。
+对于一个给定的字符序列S，请你把其循环左移K位后的序列输出。例如，字符序列S=”abcXYZdef”,
+要求输出循环左移3位后的结果，即“XYZdefabc”。是不是很简单？OK，搞定它！
+https://www.nowcoder.com/practice/12d959b108cb42b1ab72cef4d36af5ec?tpId=13&&tqId=11196&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+解法一：局部翻转，再全局反转
+class Solution {
+public:
+void ReserveWord(string &str,int begin,int end)
+{
+while(begin<end)
+{
+swap(str[begin++],str[end--]);
+}
+}
+string LeftRotateString(string str, int n)
+{
+if(str.empty()||n==0)
+{
+return str;
+}
+//减少重复移动次数，并规范n
+n%=str.size();
+int begin=0;
+int end=str.size()-1;
+ReserveWord(str, begin, n-1);
+ReserveWord(str, n,end);
+ReserveWord(str, begin, end);
+return str;
+}
+};
+
+
+//解法二：逐步向前移动字符串，向后插入字符
+class Solution {
+public:
+	void Rotatechar(string &str)
+	{
+		char temp = str[0];
+		int i = 0;
+		for (; i<str.size() - 1; i++)
+		{
+			str[i] = str[i + 1];
+		}
+		str[i] = temp;
+	}
+	string LeftRotateString(string str, int n)
+	{
+		if (str.empty() || n == 0)
+		{
+			return str;
+		}
+		n %= str.size();
+		while (n)
+		{
+			Rotatechar(str);
+			--n;
+		}
+		return str;
+	}
+};
+*/
+
+
+/*
+请实现一个函数按照之字形打印二叉树，即第一行按照从左到右的顺序打印，第二层按照从右至左的顺序打印，第三行按照从左到右的顺序打印，其他行以此类推。
+https://www.nowcoder.com/practice/91b69814117f4e8097390d107d2efbe0?tpId=13&&tqId=11212&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+struct TreeNode {
+int val;
+struct TreeNode *left;
+struct TreeNode *right;
+TreeNode(int x) :
+val(x), left(NULL), right(NULL) {
+}
+};
+
+class Solution {
+public:
+	vector<vector<int> > Print(TreeNode* pRoot)
+	{
+		vector<vector<int>> result;
+		if (pRoot == NULL)
+		{
+			return result;
+		}
+		//以队列为辅助工具，因为要层序遍历，栈的话就不行，不能层序遍历，因为后进先出
+		queue<TreeNode*> q;
+		//把队列里的节点放入栈中，从栈里取节点，，放数据
+		stack<TreeNode*> s;
+		//第一次从左往右遍历,标志位设为true
+		bool flag = true;
+		s.push(pRoot);
+		while (!s.empty())
+		{
+			vector<int> v;
+			int size = s.size();
+			for (int i = 0; i<size; i++)
+			{
+				TreeNode *cur = s.top();
+				s.pop();
+				v.push_back(cur->val);
+				//如果这一次从左往右遍历，那么下一层就应该从左往右入栈，才能实现从右往左遍历
+				TreeNode *first = flag ? cur->left : cur->right;
+				//如果这一次从右往左遍历，那么下一层就应该从右往左入栈，才能实现从左往右遍历
+				TreeNode *second = flag ? cur->right : cur->left;
+				if (first != NULL)
+					q.push(first);
+				if (second != NULL)
+					q.push(second);
+			}
+			result.push_back(v);
+			while (!q.empty())
+			{
+				s.push(q.front());
+				q.pop();
+			}
+			//更改标志位
+			flag = flag ? false : true;
+		}
+		return result;
+	}
+};
+*/
+
+
+/*
+给定一棵二叉搜索树，请找出其中的第k小的结点。例如， （5，3，7，2，4，6，8）    中，按结点数值大小顺序第三小结点的值为4。
+https://www.nowcoder.com/practice/ef068f602dde4d28aab2b210e859150a?
+struct TreeNode {
+int val;
+struct TreeNode *left;
+struct TreeNode *right;
+TreeNode(int x) :
+val(x), left(NULL), right(NULL) {
+}
+};
+
+class Solution {
+public:
+	TreeNode* KthNode(TreeNode* pRoot, int k)
+	{
+		if (pRoot == NULL || k <= 0)
+		{
+			return NULL;
+		}
+		stack<TreeNode*> s;
+		TreeNode *cur = pRoot;
+		//当s为空时也可能是左边遍历完了但还没有找到第k个节点
+		while (!s.empty() || cur != NULL)
+		{
+			while (cur != NULL)
+			{
+				s.push(cur);
+				cur = cur->left;
+			}
+			if (!s.empty())
+			{
+				//拿节点就相当于根节点，因为左边已经访问完了，拿了根节点以后，就得访问右边了
+				cur = s.top();
+				s.pop();
+				--k;
+				if (k == 0)
+				{
+					return cur;
+				}
+				cur = cur->right;
+			}
+		}
+		return NULL;
+	}
+};
+*/
