@@ -924,13 +924,13 @@ using namespace std;
 
 
 #include<vector>
+#include<algorithm>
 int main()
 {
-	vector<vector<int>> v = { { 1, 2 }, { 3, 4 } };
-	cout << v.size() << endl;
-	int n = 2;
-	n %= 6;
-	cout << n << endl;
+	Solution A;
+	string s = "ab";
+	int num=A.minCut(s);
+	cout << num << endl;
 	cin.get();
 	return 0;
 }
