@@ -663,3 +663,45 @@ public:
 	}
 };
 */
+
+/*
+输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的双向链表。要求不能创建任何新的结点，只能调整树中结点指针的指向。
+https://www.nowcoder.com/practice/947f6eb80d944a84850b0538bf0ec3a5?tpId=13&&tqId=11179&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+class Solution {
+public:
+	void ConvertNode(TreeNode *pNode, TreeNode*& pIndex)
+	{
+		if (pNode == NULL)
+			return;
+		TreeNode* cur = pNode;
+		if (cur->left)
+		{
+			ConvertNode(cur->left, pIndex);
+		}
+		cur->left = pIndex;
+		//空节点没有right
+		if (pIndex->right)
+		{
+			pIndex->right = cur;
+		}
+		pIndex = cur;
+		if (cur->right)
+		{
+			ConvertNode(cur->right, pIndex);
+		}
+	}
+	TreeNode* Convert(TreeNode* pRootOfTree)
+	{
+		if (pRootOfTree == NULL)
+			return NULL;
+		TreeNode* pListIndex = NULL;
+		ConvertNode(pRootOfTree, pListIndex);
+		TreeNode* pHead = pListIndex;
+		while (pHead->left != NULL && pHead != NULL)
+		{
+			pHead = pHead->left;
+		}
+		return pHead;
+	}
+};
+*/
