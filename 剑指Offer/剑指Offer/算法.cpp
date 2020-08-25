@@ -668,40 +668,174 @@ public:
 输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的双向链表。要求不能创建任何新的结点，只能调整树中结点指针的指向。
 https://www.nowcoder.com/practice/947f6eb80d944a84850b0538bf0ec3a5?tpId=13&&tqId=11179&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
 class Solution {
-public:
-	void ConvertNode(TreeNode *pNode, TreeNode*& pIndex)
+	public:
+	void ConvertNode(TreeNode *pNode,TreeNode*& pIndex)
 	{
-		if (pNode == NULL)
+		if(pNode==NULL)
 			return;
-		TreeNode* cur = pNode;
-		if (cur->left)
+		TreeNode* cur=pNode;
+		if(cur->left)
 		{
 			ConvertNode(cur->left, pIndex);
 		}
-		cur->left = pIndex;
+		cur->left=pIndex;
 		//空节点没有right
-		if (pIndex->right)
+		if(pIndex!=NULL)
 		{
-			pIndex->right = cur;
+			pIndex->right=cur;
 		}
-		pIndex = cur;
-		if (cur->right)
+		pIndex=cur;
+		if(cur->right)
 		{
 			ConvertNode(cur->right, pIndex);
 		}
 	}
 	TreeNode* Convert(TreeNode* pRootOfTree)
 	{
-		if (pRootOfTree == NULL)
+		if(pRootOfTree==NULL)
 			return NULL;
-		TreeNode* pListIndex = NULL;
+		TreeNode* pListIndex=NULL;
 		ConvertNode(pRootOfTree, pListIndex);
-		TreeNode* pHead = pListIndex;
-		while (pHead->left != NULL && pHead != NULL)
+		TreeNode* pHead=pListIndex;
+		while(pHead!=NULL && pHead->left!=NULL )
 		{
-			pHead = pHead->left;
+			pHead=pHead->left;
 		}
 		return pHead;
+	}
+};
+*/
+
+/*输入一个矩阵，按照从外向里以顺时针的顺序依次打印出每一个数字，例如，如果输入如下4 X 4矩阵： 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 
+则依次打印出数字1, 2, 3, 4, 8, 12, 16, 15, 14, 13, 9, 5, 6, 7, 11, 10.
+https://www.nowcoder.com/practice/9b4c81a02cd34f76be2659fa0d54342a?tpId=13&&tqId=11172&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+class Solution {
+public:
+	void PrintfVector(vector<vector<int>> matrix, vector<int>& result, int rows, int cols, int start)
+	{
+		//每次都是从（start,start）开始打印的
+		int EndX = cols - 1 - start;
+		int EndY = rows - 1 - start;
+		//上
+		for (int i = start; i <= EndX; ++i)
+		{
+			result.push_back(matrix[start][i]);
+		}
+		//右边
+		//如只有一行
+		if (start<EndY)
+		{
+			for (int i = start + 1; i <= EndY; ++i)
+			{
+				result.push_back(matrix[i][EndX]);
+			}
+		}
+		//下
+		//至少有两行才能打印下面的一行
+		if (start<EndX&&start<EndY)
+		{
+			for (int i = EndX - 1; i >= start; --i)
+			{
+				result.push_back(matrix[EndY][i]);
+			}
+		}
+		//左
+		//至少保证有三行两列
+		if (start<EndX&&start<EndY - 1)
+		{
+			for (int i = EndY - 1; i>start; --i)
+			{
+				result.push_back(matrix[i][start]);
+			}
+		}
+	}
+	vector<int> printMatrix(vector<vector<int> > matrix)
+	{
+		vector<int> result;
+		if (matrix.empty())
+		{
+			result;
+		}
+		int rows = matrix.size();
+		int cols = matrix[0].size();
+		int start = 0;
+		while (rows>start * 2 && cols>start * 2)
+		{
+			PrintfVector(matrix, result, rows, cols, start);
+			++start;
+		}
+		return result;
+	}
+};
+*/
+
+
+/*
+给定一个double类型的浮点数base和int类型的整数exponent。求base的exponent次方。
+保证base和exponent不同时为0
+https://www.nowcoder.com/practice/1a834e5e3e1a4b7ba251417554e07c00?tpId=13&&tqId=11165&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+class Solution {
+	public:
+	double Power(double base, int exponent)
+	{
+		bool flag=false;
+		//保证不能给0求倒数，这样会导致程序出错
+		if(base==0.0&&exponent<0)
+		{
+			flag=true;
+			return 0.0;
+		}
+		unsigned int absexponent=abs(exponent);
+		double result=1.0;
+		for(int i=0;i<absexponent;++i)
+		{
+			result*=base;
+		}
+		if(exponent<0)
+		{
+			result=1.0/result;
+		}
+		return result;
+	}
+};
+*/
+
+/*
+从上到下按层打印二叉树，同一层结点从左至右输出。每一层输出一行。
+https://www.nowcoder.com/practice/445c44d982d04483b04a54f298796288?tpId=13&&tqId=11213&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+class Solution {
+public:
+	vector<vector<int> > Print(TreeNode* pRoot)
+	{
+		vector<vector<int>> result;
+		if (pRoot == NULL)
+		{
+			return result;
+		}
+		queue<TreeNode*> q;
+		q.push(pRoot);
+		while (!q.empty())
+		{
+			int n = q.size();
+			vector<int> temp;
+			for (int i = 0; i<n; ++i)
+			{
+				TreeNode* cur = q.front();
+				q.pop();
+				temp.push_back(cur->val);
+				if (cur->left)
+				{
+					q.push(cur->left);
+				}
+				if (cur->right)
+				{
+					q.push(cur->right);
+				}
+			}
+			result.push_back(temp);
+
+		}
+		return result;
 	}
 };
 */
