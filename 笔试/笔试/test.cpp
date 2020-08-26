@@ -395,46 +395,46 @@ using namespace std;
 
 
 
-#include<iostream>
-#include<string>
-#include<vector>
-using namespace std;
-int main()
-{
-	string str;
-	getline(cin, str);
-	int n;
-	cin >> n;
-	vector<vector<int>> numbers(0, vector<int>(2, 0));
-	for (int i = 0; i < n; ++i)
-	{
-		vector<int> temp;
-		int a, b;
-		cin >> a >> b;
-		temp.push_back(a);
-		temp.push_back(b);
-		numbers.push_back(temp);
-	}
-	vector<int> tmp(10);
-	for (int i = 0; i < n; ++i)
-	{
-
-		for (int j = 0; j < 10; j++)
-		{
-			if (tmp[j] == numbers[i][0])
-			{
-				tmp[j] = numbers[i][1];
-			}
-		}
-		tmp[numbers[i][0]] = numbers[i][1];
-	}
-	for (int i = 0; i < str.size(); ++i)
-	{
-		int j = str[i] - '0';
-		char c = tmp[j] + '0';
-		str[i] = c;
-	}
-	cout << str << endl;
-	cin.get();
-	return 0;
-}
+//#include<iostream>
+//#include<string>
+//#include<vector>
+//using namespace std;
+//int main()
+//{
+//	string str;
+//	getline(cin, str);
+//	int n;
+//	cin >> n;
+//	vector<vector<int>> numbers(0, vector<int>(2, 0));
+//	for (int i = 0; i < n; ++i)
+//	{
+//		vector<int> temp;
+//		int a, b;
+//		cin >> a >> b;
+//		temp.push_back(a);
+//		temp.push_back(b);
+//		numbers.push_back(temp);
+//	}
+//	vector<int> tmp(10);
+//	for (int i = 0; i < n; ++i)
+//	{
+//
+//		for (int j = 0; j < 10; j++)
+//		{
+//			if (tmp[j] == numbers[i][0])
+//			{
+//				tmp[j] = numbers[i][1];
+//			}
+//		}
+//		tmp[numbers[i][0]] = numbers[i][1];
+//	}
+//	for (int i = 0; i < str.size(); ++i)
+//	{
+//		int j = str[i] - '0';
+//		char c = tmp[j] + '0';
+//		str[i] = c;
+//	}
+//	cout << str << endl;
+//	cin.get();
+//	return 0;
+//}
