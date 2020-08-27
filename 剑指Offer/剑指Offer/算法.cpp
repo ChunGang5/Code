@@ -839,3 +839,181 @@ public:
 	}
 };
 */
+
+/*
+给一个链表，若其中包含环，请找出该链表的环的入口结点，否则，输出null。
+2(L+X)=L+X+nR
+L=nR-X;
+https://www.nowcoder.com/practice/253d2c59ec3e4bc68da16833f79a38e4?tpId=13&&tqId=11208&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+class Solution {
+public:
+	ListNode* EntryNodeOfLoop(ListNode* pHead)
+	{
+		if (pHead == NULL)
+		{
+			return NULL;
+		}
+		ListNode* fast = pHead;
+		ListNode* last = pHead;
+		bool flag = false;
+		while (fast != NULL&&fast->next != NULL)
+		{
+			fast = fast->next->next;
+			last = last->next;
+			if (fast == last)
+			{
+				flag = true;
+				break;
+			}
+		}
+		if (!flag)
+		{
+			return NULL;
+		}
+		ListNode* pM = last;
+		ListNode* pH = pHead;
+		while (pM != pH)
+		{
+			pM = pM->next;
+			pH = pH->next;
+		}
+		return pM;
+	}
+};
+
+
+//方法二：用map解决
+#include<unordered_map>
+class Solution {
+public:
+	ListNode* EntryNodeOfLoop(ListNode* pHead)
+	{
+		if(pHead==NULL)
+		{
+			
+		}
+		unordered_map<ListNode*,int> ListMap;
+		ListNode* cur=pHead;
+		bool flag=false;
+		while(cur)
+		{
+			if(ListMap.find(cur)==ListMap.end())
+			{
+				ListMap.insert({cur,1});
+			}
+			else
+			{
+				flag=true;
+				break;
+			}
+			cur=cur->next;
+		}
+		if(!flag)
+		{
+			return NULL;
+		}
+		return cur;
+	}
+};
+*/
+
+/*
+每年六一儿童节,牛客都会准备一些小礼物去看望孤儿院的小朋友,今年亦是如此。HF作为牛客的资深元老,自然也准备了一些小游戏。
+其中,有个游戏是这样的:首先,让小朋友们围成一个大圈。然后,他随机指定一个数m,让编号为0的小朋友开始报数。
+每次喊到m-1的那个小朋友要出列唱首歌,然后可以在礼品箱中任意的挑选礼物,并且不再回到圈中,从他的下一个小朋友开始,
+继续0...m-1报数....这样下去....直到剩下最后一个小朋友,可以不用表演,并且拿到牛客名贵的“名侦探柯南”典藏版(名额有限哦!!^_^)。
+请你试着想下,哪个小朋友会得到这份礼品呢？(注：小朋友的编号是从0到n-1)
+
+如果没有小朋友，请返回-1
+约瑟夫环问题
+class Solution {
+public:
+	int LastRemaining_Solution(int n, int m)
+	{
+		if (n<1 || m<1)
+		{
+			return -1;
+		}
+		list<int> Loop;
+		for (int i = 0; i<n; ++i)
+		{
+			Loop.push_back(i);
+		}
+		auto cur = Loop.begin();
+		while (Loop.size()>0)
+		{
+			for (int i = 1; i<m; ++i)
+			{
+				cur++;
+				if (cur == Loop.end())
+				{
+					cur = Loop.begin();
+				}
+			}
+			auto next = ++cur;
+			if (next == Loop.end())
+			{
+				next = Loop.begin();
+			}
+			--cur;
+			Loop.erase(cur);
+			cur = next;
+		}
+		return *cur;
+	}
+};
+*/
+
+/*
+写一个函数，求两个整数之和，要求在函数体内不得使用+、-、*、/四则运算符号。
+https://www.nowcoder.com/practice/59ac416b4b944300b617d4f7f111b215?tpId=13&&tqId=11201&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+class Solution {
+public:
+	int Add(int num1, int num2)
+	{
+		int sum, carry;
+		do
+		{
+			//产生不带进位的加法运算结果
+			sum = num1^num2;
+			//num1+num2产生的进位
+			carry = (num1&num2) << 1;
+			num1 = sum;
+			num2 = carry;
+		} while (num2 != 0);    //num2也就是carry为0，即没有进位时循环终止
+		return num1;
+	}
+};
+*/
+
+/*
+在一个字符串(0<=字符串长度<=10000，全部由字母组成)中找到第一个只出现一次的字符,并返回它的位置, 如果没有则返回 -1（需要区分大小写）.（从0开始计数）
+https://www.nowcoder.com/practice/1c82e8cf713b4bbeb2a5b31cf5b0417c?tpId=13&&tqId=11187&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+class Solution {
+public:
+	int FirstNotRepeatingChar(string str)
+	{
+		if (str.empty())
+		{
+			return -1;
+		}
+		vector<int> HashTable(256, 0);    //1KB
+		for (int i = 0; i<str.size(); ++i)
+		{
+			HashTable[str[i]]++;
+		}
+		int i = 0;
+		while (str[i] != '\0')
+		{
+			if (HashTable[str[i]] == 1)
+			{
+				cout << str[i] << endl;
+				return i;
+			}
+			++i;
+		}
+		return -1;
+	}
+};
+*/
+
