@@ -438,3 +438,70 @@ using namespace std;
 //	cin.get();
 //	return 0;
 //}
+
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//long long TenReverseFive(long long n)
+//{
+//	long long number = 0;
+//	while (n)
+//	{
+//		int temp = n % 10;
+//		if (temp == 0)
+//		{
+//			n /= 10;
+//		}
+//		else
+//		{
+//			break;
+//		}
+//	}
+//	while (n)
+//	{
+//		int temp = n % 10;
+//		number = number * 10 + temp;
+//		n /= 10;
+//	}
+//	vector<int> arr;
+//	while (number)
+//	{
+//		int temp = number % 5;
+//		arr.insert(arr.begin(), temp);
+//		number /= 5;
+//	}
+//	long long result=0;
+//	auto it = arr.begin();
+//	while (it != arr.end())
+//	{
+//		result = result * 10 + (*it++);
+//	}
+//	return result;
+//}
+//int main()
+//{
+//	long long TenNumeber = 0;
+//	cin >> TenNumeber;
+//	int FiveNumber = TenReverseFive(TenNumeber);
+//	cout << FiveNumber << endl;
+//	return 0;
+//}
+
+
+#include<iostream>
+#include<vector>
+using namespace std;
+int main()
+{
+	int n, m;
+	cin >> n >> m;
+	vector<int> boss;
+	for (int i = 0; i < n; ++i)
+	{
+		int temp = 0;
+		cin >> temp;
+		boss.push_back(temp);
+	}
+
+}
