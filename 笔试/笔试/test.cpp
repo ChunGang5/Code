@@ -489,19 +489,45 @@ using namespace std;
 //}
 
 
-#include<iostream>
-#include<vector>
+#include <iostream>
+#include <vector>
+#include <string>
 using namespace std;
+
+//////////////////////////////////////////////////////////////////////////
+//请根据要求实现以下函数
+class ToString {
+public:
+	void toString(int x, vector<string>& output)
+	{
+
+	}
+};
+//////////////////////////////////////////////////////////////////////////
+//以下的输入输出代码请勿改动
 int main()
 {
-	int n, m;
-	cin >> n >> m;
-	vector<int> boss;
-	for (int i = 0; i < n; ++i)
-	{
-		int temp = 0;
-		cin >> temp;
-		boss.push_back(temp);
-	}
+	ToString t;
+	auto ilineCount = 0;
+	string line;
+	getline(cin, line);
+	auto iTotalLines = stoi(line);
+	vector<string> curRes;
 
+	while (ilineCount < iTotalLines)
+	{
+		getline(cin, line);
+
+		t.toString(stoi(line), curRes);
+		string curlineRes;
+		for (auto iter = curRes.cbegin(); iter != curRes.cend(); iter++)
+		{
+			curlineRes += (*iter) + " ";
+		}
+		curRes.clear();
+		cout << curlineRes << endl;
+
+		ilineCount++;
+	}
+	return 0;
 }
