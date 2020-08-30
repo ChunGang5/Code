@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS 1
 #include<iostream>
 #include<vector>
 using namespace std;
@@ -489,45 +490,205 @@ using namespace std;
 //}
 
 
-#include <iostream>
-#include <vector>
-#include <string>
-using namespace std;
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//using namespace std;
+//
+////////////////////////////////////////////////////////////////////////////
+////请根据要求实现以下函数
+//class ToString {
+//public:
+//	void toString(int x, vector<string>& output)
+//	{
+//
+//	}
+//};
+////////////////////////////////////////////////////////////////////////////
+////以下的输入输出代码请勿改动
+//int main()
+//{
+//	ToString t;
+//	auto ilineCount = 0;
+//	string line;
+//	getline(cin, line);
+//	auto iTotalLines = stoi(line);
+//	vector<string> curRes;
+//
+//	while (ilineCount < iTotalLines)
+//	{
+//		getline(cin, line);
+//
+//		t.toString(stoi(line), curRes);
+//		string curlineRes;
+//		for (auto iter = curRes.cbegin(); iter != curRes.cend(); iter++)
+//		{
+//			curlineRes += (*iter) + " ";
+//		}
+//		curRes.clear();
+//		cout << curlineRes << endl;
+//
+//		ilineCount++;
+//	}
+//	return 0;
+//}
 
-//////////////////////////////////////////////////////////////////////////
-//请根据要求实现以下函数
-class ToString {
-public:
-	void toString(int x, vector<string>& output)
-	{
 
-	}
-};
-//////////////////////////////////////////////////////////////////////////
-//以下的输入输出代码请勿改动
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//int main()
+//{
+//	vector<int> arr;
+//	int num = 0;
+//	while (1)
+//	{
+//		cin >> num;
+//		arr.push_back(num);
+//		if (cin.get() == '\n')
+//		{
+//			break;
+//		}
+//	}
+//	int count = 0;
+//	auto it = arr.begin();
+//	
+//	while (it != arr.end() )
+//	{
+//		if (*it == 0)
+//		{
+//			
+//			it=arr.erase(it);
+//			++count;
+//		}
+//		else
+//		{
+//			++it;
+//		}
+//	}
+//	//补0
+//	for (int i = 0; i < count; ++i)
+//	{
+//		arr.push_back(0);
+//	}
+//	//输出
+//	for (auto e:arr)
+//	{
+//		cout << e;
+//	}
+//	cout << endl;
+//	return 0;
+//}
+#include<stdlib.h>
+#include<stdio.h>
+#include<string.h>
+
+void getmemory(char*& p)
+{
+	p = (char*)malloc(100);
+}
+void test()
+{
+	char *str = NULL;
+	getmemory(str);
+	strcpy(str, "hello wordle!");
+	printf("%s\n", str);
+}
 int main()
 {
-	ToString t;
-	auto ilineCount = 0;
-	string line;
-	getline(cin, line);
-	auto iTotalLines = stoi(line);
-	vector<string> curRes;
-
-	while (ilineCount < iTotalLines)
-	{
-		getline(cin, line);
-
-		t.toString(stoi(line), curRes);
-		string curlineRes;
-		for (auto iter = curRes.cbegin(); iter != curRes.cend(); iter++)
-		{
-			curlineRes += (*iter) + " ";
-		}
-		curRes.clear();
-		cout << curlineRes << endl;
-
-		ilineCount++;
-	}
+	test();
 	return 0;
 }
+//typedef struct ListNode {
+//	int val;
+//	ListNode *next;	
+//}ListNode;
+//ListNode* mergeTwoLists(ListNode* l1, ListNode* l2)
+//	{
+//	if (l1 == NULL)
+//	{
+//		return l2;
+//	}
+//	if (l2 == NULL)
+//	{
+//		return l1;
+//	}
+//	ListNode* newList = NULL;
+//	ListNode* cur1 = l1;
+//	ListNode* cur2 = l2;
+//	ListNode* tail = NULL;
+//	if (cur1->val <= cur2->val)
+//	{
+//		newList = cur1;
+//		cur1 = cur1->next;
+//	}
+//	else
+//	{
+//		newList = cur2;
+//		cur2 = cur2->next;
+//	}
+//	tail = newList;
+//	while (cur1&&cur2)
+//	{
+//		if (cur1->val <= cur2->val)
+//		{
+//			tail->next = cur1;
+//			cur1 = cur1->next;
+//		}
+//		else{
+//			tail->next = cur2;
+//			cur2 = cur2->next;
+//		}
+//		tail = tail->next;
+//	}
+//	if (cur1 == NULL)
+//	{
+//		tail->next = cur2;
+//	}
+//	if (cur2 == NULL)
+//	{
+//		tail->next = cur1;
+//	}
+//	return newList;
+//}
+//int main()
+//{
+//	ListNode* pHead1 = NULL;
+//	ListNode* pHead2 = NULL;
+//	int num = 0;
+//	ListNode* cur1 = pHead1;
+//	ListNode* cur2 = pHead2;
+//	while (1)
+//	{
+//		cin >> num;
+//		ListNode* newNode = (ListNode*)malloc(sizeof(ListNode*));
+//		newNode->val = num;
+//		cur1->next = newNode;
+//		cur1 = cur1->next;
+//		if (cin.get() == '\n')
+//		{
+//			break;
+//		}
+//	}
+//	while (1)
+//	{
+//		cin >> num;
+//		ListNode* newNode = (ListNode*)malloc(sizeof(ListNode*));
+//		newNode->val = num;
+//		cur2->next = newNode;
+//		cur2 = cur2->next;
+//		if (cin.get() == '\n')
+//		{
+//			break;
+//		}
+//	}
+//	ListNode* newpHead=mergeTwoLists(pHead1->next, pHead2->next);
+//	ListNode* cur = newpHead->next;
+//	while (cur)
+//	{
+//		cout << cur->val;
+//		cur = cur->next;
+//	}
+//	cout << endl;
+//	return 0;
+//}
