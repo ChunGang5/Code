@@ -579,26 +579,26 @@ using namespace std;
 //	cout << endl;
 //	return 0;
 //}
-#include<stdlib.h>
-#include<stdio.h>
-#include<string.h>
-
-void getmemory(char*& p)
-{
-	p = (char*)malloc(100);
-}
-void test()
-{
-	char *str = NULL;
-	getmemory(str);
-	strcpy(str, "hello wordle!");
-	printf("%s\n", str);
-}
-int main()
-{
-	test();
-	return 0;
-}
+//#include<stdlib.h>
+//#include<stdio.h>
+//#include<string.h>
+//
+//void getmemory(char*& p)
+//{
+//	p = (char*)malloc(100);
+//}
+//void test()
+//{
+//	char *str = NULL;
+//	getmemory(str);
+//	strcpy(str, "hello wordle!");
+//	printf("%s\n", str);
+//}
+//int main()
+//{
+//	test();
+//	return 0;
+//}
 //typedef struct ListNode {
 //	int val;
 //	ListNode *next;	
@@ -692,3 +692,65 @@ int main()
 //	cout << endl;
 //	return 0;
 //}
+
+
+#include<unordered_map>
+class Solution {
+public:
+	/**
+	*
+	* @param values string字符串二维数组
+	* @param valuesRowLen int values数组行数
+	* @param valuesColLen int* values数组列数
+	* @return string字符串vector
+	*/
+	vector<string> findCommonString(string** values, int valuesRowLen, int* valuesColLen)
+	{
+		vector<string> result;
+		if (valuesRowLen == 0)
+		{
+			return result;
+		}
+		unordered_map<string, int> Map;
+		for (int i = 0; i < valuesRowLen; ++i)
+		{
+			for (int j = 0; j < valuesColLen[i]; ++j)
+			{
+				if (Map.find(values[i][j]) == Map.end())
+				{
+					Map.insert({ values[i][j], 1 });
+				}
+				else
+				{
+					++Map[values[i][j]];
+				}
+			}
+		}
+		
+		auto it = Map.begin();
+		while (it != Map.end())
+		{
+			string str;
+			if ((*it).second == valuesRowLen)
+			{
+				str = (*it).first;
+				result.push_back(str);
+			}
+			it++;
+		}
+		return result;
+	}
+};
+
+
+int main()
+{
+	unordered_map<int, int> mp;
+	for (int i = 0; i < 10; ++i)
+	{
+		if (mp.find(i) != mp.end())
+		{
+
+		}
+	}
+}
