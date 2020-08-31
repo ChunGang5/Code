@@ -912,5 +912,99 @@ using namespace std;
 //};
 
 
+/*
+//二叉树三种遍历的非递归写法
+//前序
+class Solution {
+public:
+	vector<int> preorderTraversal(TreeNode* root)
+	{
+		vector<int> result;
+		if (root == NULL)
+		{
+			return result;
+		}
+		stack<TreeNode*> st;
+		st.push(root);
+		while (!st.empty())
+		{
+			TreeNode* cur = st.top();
+			result.push_back(cur->val);
+			st.pop();
+			if (cur->right)
+				st.push(cur->right);
+			if (cur->left)
+				st.push(cur->left);
+		}
+		return result;
+	}
+};
+//中序
+class Solution {
+public:
+	vector<int> inorderTraversal(TreeNode* root)
+	{
+		vector<int> result;
+		if (root == NULL)
+			return result;
+		stack<TreeNode*> st;
+		st.push(root);
+		while (!st.empty())
+		{
+			TreeNode* cur = st.top();
+			st.pop();
+			if (cur != NULL)
+			{
+				if (cur->right)
+					st.push(cur->right);
+				st.push(cur);
+				st.push(NULL);
+				if (cur->left)
+					st.push(cur->left);
+			}
+			else
+			{
+				result.push_back(st.top()->val);
+				st.pop();
+			}
+		}
+		return result;
+	}
+};
+//后序
+class Solution {
+public:
+	vector<int> postorderTraversal(TreeNode* root)
+	{
+		vector<int> result;
+		if (root == NULL)
+		{
+			return result;
+		}
+		stack<TreeNode*> st;
+		st.push(root);
+		while (!st.empty())
+		{
+			TreeNode* cur = st.top();
+			st.pop();
+			if (cur != NULL)
+			{   //以NULL为判断根节点的条件
+				st.push(cur);
+				st.push(NULL);
+				if (cur->right)
+					st.push(cur->right);
+				if (cur->left)
+					st.push(cur->left);
+			}
+			else
+			{
+				result.push_back(st.top()->val);
+				st.pop();
+			}
+		}
+		return result;
+	}
+};
+*/
 
 
