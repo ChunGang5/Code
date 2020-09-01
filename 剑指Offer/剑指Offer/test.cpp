@@ -1007,4 +1007,46 @@ public:
 };
 */
 
+/*
+将一个字符串转换成一个整数，要求不能使用字符串转换整数的库函数。 数值为0或者字符串不是一个合法的数值则返回0
+https://www.nowcoder.com/practice/1277c681251b4372bdef344468e4f26e?tpId=13&&tqId=11202&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+
+class Solution {
+public:
+	int StrToInt(string str)
+	{
+		if (str.empty())
+		{
+			return 0;
+		}
+		int flag = 1;
+		if (str[0] == '-')
+		{
+			flag = -1;
+			str[0] = '0';
+		}
+		else if (str[0] == '+')
+		{
+			str[0] = '0';
+		}
+		int sum = 0;
+		for (int i = 0; i<str.size(); ++i)
+		{
+			if (str[i]<'0' || str[i]>'9')
+			{
+				sum = 0;
+				break;
+			}
+			int temp = sum;
+			sum = sum * 10 + (str[i] - '0');
+			if ((sum - (str[i] - '0')) / 10 != temp)
+			{
+				return 0;
+			}
+		}
+		sum = sum*flag;
+		return sum;
+	}
+};
+*/
 
