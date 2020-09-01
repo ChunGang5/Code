@@ -754,3 +754,123 @@ int main()
 		}
 	}
 }
+
+
+
+
+
+#include <stdio.h>
+int Month1[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+int Month2[12] = { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+bool isR(int year){
+	if (year % 4 == 0 && year % 100 != 0){
+		return true;
+	}
+	else if (year % 400 == 0){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+int main(){
+	int y1, y2, m1, m2, d1, d2;
+	int day = 0;
+	long long data = 20190205;
+	long long temp;
+	scanf("%lld", &temp);
+	y1 = data / 10000;
+	y2 = temp / 10000;
+	m1 = data / 100 % 100;
+	m2 = temp / 100 % 100;
+	d1 = data % 100;
+	d2 = temp % 100;
+	if (y2 - y1 == 0 && m2 - m1 == 0){
+		day = d2 - d1;
+	}
+	else if (y2 - y1 == 0 && m2 - m1>0){
+		day = Month1[m1 - 1] - d1;
+		day += d2;
+		for (int i = m1; i<m2 - 1; i++){
+			day += Month1[i];
+		}
+	}
+	else if (y2 - y1 == 0 && m2 - m1<0){
+		day = Month1[m2 - 1] - d2;
+		day += d1;
+		for (int i = m2; i<m1 - 1; i++){
+			day += Month1[i];
+		}
+	}
+	else if (y2 - y1>0){
+		day += Month1[m1 - 1] - d1;
+		for (int i = m1; i<12; i++){
+			day += Month1[i];
+		}
+		if (isR(y2) == true){
+			day += d2;
+			for (int i = 0; i<m2 - 1; i++){
+				day += Month2[i];
+			}
+		}
+		else{
+			day += d2;
+			for (int i = 0; i<m2 - 1; i++){
+				day += Month1[i];
+			}
+		}
+		for (int i = y1 + 1; i<y2; i++){
+			if (isR(i) == true){
+				day += 366;
+			}
+			else{
+				day += 365;
+			}
+		}
+	}
+	else if (y2 - y1<0){
+		if (isR(y2) == true){
+			day += Month2[m2 - 1] - d2;
+			for (int i = m2; i<12; i++){
+				day += Month2[i];
+			}
+		}
+		else{
+			day += Month1[m2 - 1] - d2;
+			for (int i = m2; i<12; i++){
+				day += Month1[i];
+			}
+		}
+		day += d1;
+		for (int i = 0; i<m1 - 1; i++){
+			day += Month1[i];
+		}
+		for (int i = y2 + 1; i<y1; i++){
+			if (isR(i) == true){
+				day += 366;
+			}
+			else{
+				day += 365;
+			}
+		}
+	}
+	//输出日期是周几
+	int dayofweek(int y, int m, int d)  /* 0 = Sunday */
+	{
+		static int t[] = { 0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4 };
+		y -= m < 3;
+		return (y + y / 4 - y / 100 + y / 400 + t[m - 1] + d) % 7;
+	}
+	int week = dayofweek(y1, m1, d1);
+	void IsPeixunDay(int y1, int m1, int d1, int y2, int m2, int d2, int day,int beginweek)
+	{
+		if (y1 - y2 == 0 && m1 - m2 = 0)
+		{
+
+		}
+	}
+
+
+	printf("%d\n", day);
+	return 0;
+}
