@@ -694,183 +694,339 @@ using namespace std;
 //}
 
 
-#include<unordered_map>
-class Solution {
-public:
-	/**
-	*
-	* @param values string字符串二维数组
-	* @param valuesRowLen int values数组行数
-	* @param valuesColLen int* values数组列数
-	* @return string字符串vector
-	*/
-	vector<string> findCommonString(string** values, int valuesRowLen, int* valuesColLen)
+//#include<unordered_map>
+//class Solution {
+//public:
+//	/**
+//	*
+//	* @param values string字符串二维数组
+//	* @param valuesRowLen int values数组行数
+//	* @param valuesColLen int* values数组列数
+//	* @return string字符串vector
+//	*/
+//	vector<string> findCommonString(string** values, int valuesRowLen, int* valuesColLen)
+//	{
+//		vector<string> result;
+//		if (valuesRowLen == 0)
+//		{
+//			return result;
+//		}
+//		unordered_map<string, int> Map;
+//		for (int i = 0; i < valuesRowLen; ++i)
+//		{
+//			for (int j = 0; j < valuesColLen[i]; ++j)
+//			{
+//				if (Map.find(values[i][j]) == Map.end())
+//				{
+//					Map.insert({ values[i][j], 1 });
+//				}
+//				else
+//				{
+//					++Map[values[i][j]];
+//				}
+//			}
+//		}
+//		
+//		auto it = Map.begin();
+//		while (it != Map.end())
+//		{
+//			string str;
+//			if ((*it).second == valuesRowLen)
+//			{
+//				str = (*it).first;
+//				result.push_back(str);
+//			}
+//			it++;
+//		}
+//		return result;
+//	}
+//};
+//
+//
+//int main()
+//{
+//	unordered_map<int, int> mp;
+//	for (int i = 0; i < 10; ++i)
+//	{
+//		if (mp.find(i) != mp.end())
+//		{
+//
+//		}
+//	}
+//}
+
+
+
+
+
+//#include <stdio.h>
+//int Month1[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+//int Month2[12] = { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+//bool isR(int year){
+//	if (year % 4 == 0 && year % 100 != 0){
+//		return true;
+//	}
+//	else if (year % 400 == 0){
+//		return true;
+//	}
+//	else{
+//		return false;
+//	}
+//}
+//int main(){
+//	int y1, y2, m1, m2, d1, d2;
+//	int day = 0;
+//	long long data = 20190205;
+//	long long temp;
+//	scanf("%lld", &temp);
+//	y1 = data / 10000;
+//	y2 = temp / 10000;
+//	m1 = data / 100 % 100;
+//	m2 = temp / 100 % 100;
+//	d1 = data % 100;
+//	d2 = temp % 100;
+//	if (y2 - y1 == 0 && m2 - m1 == 0){
+//		day = d2 - d1;
+//	}
+//	else if (y2 - y1 == 0 && m2 - m1>0){
+//		day = Month1[m1 - 1] - d1;
+//		day += d2;
+//		for (int i = m1; i<m2 - 1; i++){
+//			day += Month1[i];
+//		}
+//	}
+//	else if (y2 - y1 == 0 && m2 - m1<0){
+//		day = Month1[m2 - 1] - d2;
+//		day += d1;
+//		for (int i = m2; i<m1 - 1; i++){
+//			day += Month1[i];
+//		}
+//	}
+//	else if (y2 - y1>0){
+//		day += Month1[m1 - 1] - d1;
+//		for (int i = m1; i<12; i++){
+//			day += Month1[i];
+//		}
+//		if (isR(y2) == true){
+//			day += d2;
+//			for (int i = 0; i<m2 - 1; i++){
+//				day += Month2[i];
+//			}
+//		}
+//		else{
+//			day += d2;
+//			for (int i = 0; i<m2 - 1; i++){
+//				day += Month1[i];
+//			}
+//		}
+//		for (int i = y1 + 1; i<y2; i++){
+//			if (isR(i) == true){
+//				day += 366;
+//			}
+//			else{
+//				day += 365;
+//			}
+//		}
+//	}
+//	else if (y2 - y1<0){
+//		if (isR(y2) == true){
+//			day += Month2[m2 - 1] - d2;
+//			for (int i = m2; i<12; i++){
+//				day += Month2[i];
+//			}
+//		}
+//		else{
+//			day += Month1[m2 - 1] - d2;
+//			for (int i = m2; i<12; i++){
+//				day += Month1[i];
+//			}
+//		}
+//		day += d1;
+//		for (int i = 0; i<m1 - 1; i++){
+//			day += Month1[i];
+//		}
+//		for (int i = y2 + 1; i<y1; i++){
+//			if (isR(i) == true){
+//				day += 366;
+//			}
+//			else{
+//				day += 365;
+//			}
+//		}
+//	}
+//	//输出日期是周几
+//	int dayofweek(int y, int m, int d)  /* 0 = Sunday */
+//	{
+//		static int t[] = { 0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4 };
+//		y -= m < 3;
+//		return (y + y / 4 - y / 100 + y / 400 + t[m - 1] + d) % 7;
+//	}
+//	int week = dayofweek(y1, m1, d1);
+//	void IsPeixunDay(int y1, int m1, int d1, int y2, int m2, int d2, int day,int beginweek)
+//	{
+//		if (y1 - y2 == 0 && m1 - m2 = 0)
+//		{
+//
+//		}
+//	}
+//
+//
+//	printf("%d\n", day);
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<map>
+//#include<vector>
+//using namespace std;
+//int main()
+//{
+//	vector<int> nums;
+//	int num;
+//	while (1)
+//	{
+//		cin >> num;
+//		nums.push_back(num);
+//		if (cin.get() == '\n')
+//		{
+//			break;
+//		}
+//	}
+//	int k = 0;
+//	cin >> k;
+//	map<int, int> Map;
+//	for (int i = 0; i < nums.size(); ++i)
+//	{
+//		
+//		if (Map.find(nums[i]) == Map.end())
+//		{
+//			Map.insert({nums[i], 1 });
+//		}
+//		else
+//		{
+//			++Map[nums[i]];
+//		}
+//	}
+//	multimap<int, int> muMap;
+//	auto it = Map.begin();
+//	while (it != Map.end())
+//	{
+//			muMap.insert({ (*it).second, (*it).first });
+//			it++;
+//	}
+//	auto it2 = muMap.begin;
+//	while (k--)
+//	{
+//		cout << (*it).second;
+//		it2++;
+//	}
+//	cout << endl;
+//	return 0;
+//}
+
+
+//#include<iostream>
+//using namespace std;
+//int main()
+//{
+//	int n = 0;
+//	cin >> n;
+//
+//	return 0;
+//}
+//
+//#include <iostream>
+//using namespace std;
+//
+//int main() {
+//	int n = 0, i = 0, j = 0;
+//	cin >> n;
+//	i = n - 1;
+//	j = 1;
+//	while (i >= 0 && j <= 2 * n - 1)
+//	{
+//		int w = i;
+//		int t = j;
+//		for (i = w; i > 0; i--)
+//			cout << ' ';
+//		for (j = 1; j <= 2 * t - 1; j++)
+//			cout << '*';
+//		for (i = w; i > 0; i--)
+//			cout << ' ';
+//		i = w;
+//		j = t;
+//		i--; j++;
+//		cout << endl;
+//	}
+//	i = 1;
+//	j = n - 1;
+//	while (i >= 0 && j >= 1)
+//	{
+//		int w = i;
+//		int t = j;
+//		for (i = w; i > 0; i--)
+//			cout << ' ';
+//		for (j = 1; j <= 2 * t - 1; j++)
+//			cout << '*';
+//		for (i = w; i > 0; i--)
+//			cout << ' ';
+//		i = w;
+//		j = t;
+//		i++; j--;
+//		cout << endl;
+//	}
+//	cout << endl;
+//	return 0;
+//}
+
+void PrintfVector(vector<vector<int>>& matrix, int rows, int cols,int start, vector<int>& result)
+{
+	int xend = rows - start ;
+	int yend = cols - start ;
+	for (int i = start; i < xend; ++i)
 	{
-		vector<string> result;
-		if (valuesRowLen == 0)
+		result.push_back(matrix[start][i]);
+	}
+	//检测数组是否只有一行
+	if (start < yend - 1)
+	{
+		for (int i = start + 1; i < yend; ++i)
 		{
-			return result;
+			result.push_back(matrix[i][xend - 1]);
 		}
-		unordered_map<string, int> Map;
-		for (int i = 0; i < valuesRowLen; ++i)
+	}
+	//检测二维数组是否只有一行两列
+	if (start<xend - 1 && start<yend - 1)
+	{
+		for (int i = yend - 1; i > start; --i)
 		{
-			for (int j = 0; j < valuesColLen[i]; ++j)
-			{
-				if (Map.find(values[i][j]) == Map.end())
-				{
-					Map.insert({ values[i][j], 1 });
-				}
-				else
-				{
-					++Map[values[i][j]];
-				}
-			}
+			result.push_back(matrix[yend - 1][i]);
 		}
-		
-		auto it = Map.begin();
-		while (it != Map.end())
+	}
+	if (start < xend - 1 && start<yend - 2)
+	{
+		for (int i = yend - 1; i > start; --i)
 		{
-			string str;
-			if ((*it).second == valuesRowLen)
-			{
-				str = (*it).first;
-				result.push_back(str);
-			}
-			it++;
+			result.push_back(matrix[i][start]);
 		}
+	}	
+}
+vector<int> SpiralMatrix(vector<vector<int> >& matrix)
+{
+	vector<int> result;
+	if (matrix.empty())
+	{
 		return result;
 	}
-};
-
-
-int main()
-{
-	unordered_map<int, int> mp;
-	for (int i = 0; i < 10; ++i)
+	int rows = matrix.size();
+	int cols = matrix[0].size();
+	//设一个每次打印的开始点,第一次从[0,0]开始
+	int start = 0;
+	while (rows > start * 2 && cols > start * 2)
 	{
-		if (mp.find(i) != mp.end())
-		{
-
-		}
+		PrintfVector(matrix, rows, cols, start, result);
+		++start;
 	}
-}
-
-
-
-
-
-#include <stdio.h>
-int Month1[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-int Month2[12] = { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-bool isR(int year){
-	if (year % 4 == 0 && year % 100 != 0){
-		return true;
-	}
-	else if (year % 400 == 0){
-		return true;
-	}
-	else{
-		return false;
-	}
-}
-int main(){
-	int y1, y2, m1, m2, d1, d2;
-	int day = 0;
-	long long data = 20190205;
-	long long temp;
-	scanf("%lld", &temp);
-	y1 = data / 10000;
-	y2 = temp / 10000;
-	m1 = data / 100 % 100;
-	m2 = temp / 100 % 100;
-	d1 = data % 100;
-	d2 = temp % 100;
-	if (y2 - y1 == 0 && m2 - m1 == 0){
-		day = d2 - d1;
-	}
-	else if (y2 - y1 == 0 && m2 - m1>0){
-		day = Month1[m1 - 1] - d1;
-		day += d2;
-		for (int i = m1; i<m2 - 1; i++){
-			day += Month1[i];
-		}
-	}
-	else if (y2 - y1 == 0 && m2 - m1<0){
-		day = Month1[m2 - 1] - d2;
-		day += d1;
-		for (int i = m2; i<m1 - 1; i++){
-			day += Month1[i];
-		}
-	}
-	else if (y2 - y1>0){
-		day += Month1[m1 - 1] - d1;
-		for (int i = m1; i<12; i++){
-			day += Month1[i];
-		}
-		if (isR(y2) == true){
-			day += d2;
-			for (int i = 0; i<m2 - 1; i++){
-				day += Month2[i];
-			}
-		}
-		else{
-			day += d2;
-			for (int i = 0; i<m2 - 1; i++){
-				day += Month1[i];
-			}
-		}
-		for (int i = y1 + 1; i<y2; i++){
-			if (isR(i) == true){
-				day += 366;
-			}
-			else{
-				day += 365;
-			}
-		}
-	}
-	else if (y2 - y1<0){
-		if (isR(y2) == true){
-			day += Month2[m2 - 1] - d2;
-			for (int i = m2; i<12; i++){
-				day += Month2[i];
-			}
-		}
-		else{
-			day += Month1[m2 - 1] - d2;
-			for (int i = m2; i<12; i++){
-				day += Month1[i];
-			}
-		}
-		day += d1;
-		for (int i = 0; i<m1 - 1; i++){
-			day += Month1[i];
-		}
-		for (int i = y2 + 1; i<y1; i++){
-			if (isR(i) == true){
-				day += 366;
-			}
-			else{
-				day += 365;
-			}
-		}
-	}
-	//输出日期是周几
-	int dayofweek(int y, int m, int d)  /* 0 = Sunday */
-	{
-		static int t[] = { 0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4 };
-		y -= m < 3;
-		return (y + y / 4 - y / 100 + y / 400 + t[m - 1] + d) % 7;
-	}
-	int week = dayofweek(y1, m1, d1);
-	void IsPeixunDay(int y1, int m1, int d1, int y2, int m2, int d2, int day,int beginweek)
-	{
-		if (y1 - y2 == 0 && m1 - m2 = 0)
-		{
-
-		}
-	}
-
-
-	printf("%d\n", day);
-	return 0;
+	return result;
 }

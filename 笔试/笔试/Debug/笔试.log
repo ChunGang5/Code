@@ -1,4 +1,4 @@
-﻿生成启动时间为 2020/8/30 22:59:13。
+﻿生成启动时间为 2020/9/4 17:38:58。
      1>项目“G:\C语言\Code\笔试\笔试\笔试.vcxproj”在节点 2 上(Rebuild 个目标)。
      1>ClCompile:
          G:\VS2013\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt test.cpp
@@ -10,4 +10,4 @@
 
 生成成功。
 
-已用时间 00:00:08.50
+已用时间 00:00:01.53
