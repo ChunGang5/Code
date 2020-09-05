@@ -980,53 +980,58 @@ using namespace std;
 //	return 0;
 //}
 
-void PrintfVector(vector<vector<int>>& matrix, int rows, int cols,int start, vector<int>& result)
+//void PrintfVector(vector<vector<int>>& matrix, int rows, int cols,int start, vector<int>& result)
+//{
+//	int xend = rows - start ;
+//	int yend = cols - start ;
+//	for (int i = start; i < xend; ++i)
+//	{
+//		result.push_back(matrix[start][i]);
+//	}
+//	//检测数组是否只有一行
+//	if (start < yend - 1)
+//	{
+//		for (int i = start + 1; i < yend; ++i)
+//		{
+//			result.push_back(matrix[i][xend - 1]);
+//		}
+//	}
+//	//检测二维数组是否只有一行两列
+//	if (start<xend - 1 && start<yend - 1)
+//	{
+//		for (int i = yend - 1; i > start; --i)
+//		{
+//			result.push_back(matrix[yend - 1][i]);
+//		}
+//	}
+//	if (start < xend - 1 && start<yend - 2)
+//	{
+//		for (int i = yend - 1; i > start; --i)
+//		{
+//			result.push_back(matrix[i][start]);
+//		}
+//	}	
+//}
+//vector<int> SpiralMatrix(vector<vector<int> >& matrix)
+//{
+//	vector<int> result;
+//	if (matrix.empty())
+//	{
+//		return result;
+//	}
+//	int rows = matrix.size();
+//	int cols = matrix[0].size();
+//	//设一个每次打印的开始点,第一次从[0,0]开始
+//	int start = 0;
+//	while (rows > start * 2 && cols > start * 2)
+//	{
+//		PrintfVector(matrix, rows, cols, start, result);
+//		++start;
+//	}
+//	return result;
+//}
+
+bool detectCapitaIUse(string word)
 {
-	int xend = rows - start ;
-	int yend = cols - start ;
-	for (int i = start; i < xend; ++i)
-	{
-		result.push_back(matrix[start][i]);
-	}
-	//检测数组是否只有一行
-	if (start < yend - 1)
-	{
-		for (int i = start + 1; i < yend; ++i)
-		{
-			result.push_back(matrix[i][xend - 1]);
-		}
-	}
-	//检测二维数组是否只有一行两列
-	if (start<xend - 1 && start<yend - 1)
-	{
-		for (int i = yend - 1; i > start; --i)
-		{
-			result.push_back(matrix[yend - 1][i]);
-		}
-	}
-	if (start < xend - 1 && start<yend - 2)
-	{
-		for (int i = yend - 1; i > start; --i)
-		{
-			result.push_back(matrix[i][start]);
-		}
-	}	
-}
-vector<int> SpiralMatrix(vector<vector<int> >& matrix)
-{
-	vector<int> result;
-	if (matrix.empty())
-	{
-		return result;
-	}
-	int rows = matrix.size();
-	int cols = matrix[0].size();
-	//设一个每次打印的开始点,第一次从[0,0]开始
-	int start = 0;
-	while (rows > start * 2 && cols > start * 2)
-	{
-		PrintfVector(matrix, rows, cols, start, result);
-		++start;
-	}
-	return result;
+
 }
