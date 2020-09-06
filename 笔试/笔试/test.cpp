@@ -1031,7 +1031,209 @@ using namespace std;
 //	return result;
 //}
 
-bool detectCapitaIUse(string word)
-{
 
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//int main()
+//{
+//	int n = 0;
+//	int m = 0;
+//	cin >> n;
+//	vector<int> v1;
+//	vector<int> v2;
+//	vector<int> result;
+//	while (1)
+//	{
+//		int num = 0;
+//		cin >> num;
+//		v1.push_back(num);
+//		if (cin.get() == '\n')
+//		{
+//			break;
+//		}
+//	}
+//	cin >> m;
+//	while (1)
+//	{
+//		int num = 0;
+//		cin >> num;
+//		v2.push_back(num);
+//		if (cin.get() == '\n')
+//		{
+//			break;
+//		}
+//	}
+//	auto it1 = v1.begin();
+//	auto it2 = v2.begin();
+//	while (it1 != v1.end())
+//	{
+//		while (it2 != v2.end())
+//		{
+//			if ((*it1) == (*it2))
+//			{
+//				result.push_back(*it1);
+//				break;
+//			}
+//			it2++;
+//		}
+//		it1++;
+//		it2 = v2.begin();
+//	}
+//	auto it = result.begin();
+//	while (it != result.end())
+//	{
+//		cout << *it++ << " ";
+//	}
+//	cout << endl;
+//	return 0;
+//}
+
+
+#include<iostream>
+#include<map>
+using namespace std;
+bool check(string& str)
+{
+	bool flag=true;
+	int i = 0;
+	while (str[i])
+	{
+		if (!isdigit(str[i++]))
+		{
+			flag = false;
+		}
+	}
+	return flag;
 }
+int main()
+{
+	int n = 0, k = 0;
+	int num;
+	cin >> n >> k;
+	num = k;
+	cin.get();
+	if ((n<1 && n>100000) || (k<1 && k>100000))
+	{
+		return 0;
+	}
+	map<string, int> Smap;
+	while (n--)
+	{
+		string str;
+		getline(cin, str);
+		if (check(str))
+		{
+			if (Smap.find(str) == Smap.end())
+			{
+				Smap.insert({ str, 1 });
+			}
+			else
+			{
+				Smap[str]++;
+			}
+		}
+	}
+	
+	multimap<int, string> swapmap;
+	auto it = Smap.begin();
+	while (it != Smap.end())
+	{
+		swapmap.insert({ (*it).second, (*it).first });
+		it++;
+	}
+	auto s_it = swapmap.begin();
+	while (k--)
+	{
+		if (s_it != swapmap.end())
+		{
+			cout << (*s_it).second << " " << (*s_it).first << endl;
+		}
+		s_it++;
+	}
+	auto s_e_it = swapmap.end();
+	k = num;
+	while (k--)
+	{
+		s_e_it--;
+	}
+	multimap<int, string> s_e_map;
+	k = num;
+	while (k--)
+	{
+		s_e_map.insert(make_pair((*s_e_it).first, (*s_e_it).second));
+		s_e_it++;
+	}
+	auto _it = s_e_map.begin();
+	while (_it!=s_e_map.end())
+	{
+		cout << (*_it).second << " " << (*_it).first << endl;
+		_it++;
+	}
+	return 0;
+}
+
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//int main()
+//{
+//	int n = 0;
+//	int m = 0;
+//	cin >> n;
+//	vector<int> v1;
+//	vector<int> v2;
+//	vector<int> result;
+//	while (1)
+//	{
+//		int num = 0;
+//		cin >> num;
+//		v1.push_back(num);
+//		if (cin.get() == '\n')
+//		{
+//			break;
+//		}
+//	}
+//	cin >> m;
+//	while (1)
+//	{
+//		int num = 0;
+//		cin >> num;
+//		v2.push_back(num);
+//		if (cin.get() == '\n')
+//		{
+//			break;
+//		}
+//	}
+	//if ((n<1 && n>100000) || (m<1 && m>100000))
+	//{
+	//	return 0;
+	//}
+//	auto it1 = v1.begin();
+//	auto it2 = v2.begin();
+//	while (it1 != v1.end() && it2 != v2.end())
+//	{
+//		if ((*it1) > (*it2))
+//		{
+//			it1++;
+//		}
+//		if ((*it1) < (*it2))
+//		{
+//			it2++;
+//		}
+//		else
+//		{
+//			result.push_back((*it1));
+//			++it1;
+//			++it2;
+//		}
+//	}
+//	auto _it = result.begin();
+//	while (_it != result.end())
+//	{
+//		cout << *_it++ << " ";
+//	}
+//	cout << endl;
+//	return 0;
+//}
