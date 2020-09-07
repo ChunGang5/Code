@@ -67,6 +67,7 @@
     <ClCompile Include="test.cpp" />
     <ClCompile Include="动态规划.cpp" />
     <ClCompile Include="回溯法.cpp" />
+    <ClCompile Include="排序问题.cpp" />
     <ClCompile Include="算法.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

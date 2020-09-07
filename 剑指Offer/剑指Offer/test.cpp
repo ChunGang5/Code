@@ -1050,3 +1050,112 @@ public:
 };
 */
 
+/*
+把只包含质因子2、3和5的数称作丑数（Ugly Number）。例如6、8都是丑数，但14不是，因为它包含质因子7。 
+习惯上我们把1当做是第一个丑数。求按从小到大的顺序的第N个丑数。
+https://www.nowcoder.com/practice/6aa9e04fc3794f68acf8778237ba065b?tpId=13&&tqId=11186&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+class Solution {
+public:
+	int Min(int a, int b, int c)
+	{
+		int min = (a<b) ? a : b;
+		min = (min<c) ? min : c;
+		return min;
+	}
+	int GetUglyNumber_Solution(int index)
+	{
+		if (index <= 0)
+		{
+			return 0;
+		}
+		if (index<7)
+		{
+			return index;
+		}
+		int *arr = new int[index];
+		int *pNum2 = arr;
+		int *pNum3 = arr;
+		int *pNum5 = arr;
+		arr[0] = 1;
+		int count = 1;
+		while (count<index)
+		{
+			int MinNum = Min(*pNum2 * 2, *pNum3 * 3, *pNum5 * 5);
+			arr[count] = MinNum;
+			//因为我现在要存的全部都是丑数，而且是升序，是*2/*3/*5得来的，所以它必然是前面的数*某个因子
+			if (*pNum2 * 2 == MinNum)
+				++pNum2;
+			if (*pNum3 * 3 == MinNum)
+				++pNum3;
+			if (*pNum5 * 5 == MinNum)
+				++pNum5;
+			++count;
+		}
+		int result = arr[index - 1];
+		delete[]arr;
+		return result;
+	}
+};
+*/
+
+/*
+在数组中的两个数字，如果前面一个数字大于后面的数字，则这两个数字组成一个逆序对。输入一个数组, 求出这个数组中的逆序对的总数P。
+并将P对1000000007取模的结果输出。 即输出P % 1000000007
+https://www.nowcoder.com/practice/96bd6684e04a44eb80e6a68efc0ec6c5?tpId=13&&tqId=11188&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+long long InversePairs(vector<int>& data, vector<int>& copy, int start, int end)
+{
+	//划分完毕，一个区间里只有一个元素
+	if (start == end)
+	{
+		copy[start] = data[start];
+		return 0;
+	}
+	int middle = (end - start) / 2;
+	//首先原数组是不能改变的，不然后续比较数据就乱了，只能改变copy数组，按照常理得将copy最后拷贝到data
+	//以作为下一次合并得新的数组，但是剑指offer版太秀了
+	//这尼玛换数组，直接省去复制开销也太帅了吧，所以要以引用方式传值，不然就没有改变原数组
+	long long left = InversePairs(copy, data, start, start + middle);
+	long long right = InversePairs(copy, data, start + middle + 1, end);
+	//我们从后往前开始对比，其实从前往后也可以
+	int i = start + middle;
+	int j = end;
+	int indexCopy = end;
+	long long count = 0;
+	while (i >= start&&j >= start + middle + 1)
+	{
+		if (data[i] > data[j])
+		{
+			copy[indexCopy--] = data[i--];
+			count = count + j - start - middle;
+		}
+		else
+		{
+			copy[indexCopy--] = data[j--];
+		}
+	}
+	while (i >= start)
+	{
+		copy[indexCopy--] = data[i--];
+	}
+	while (j >= start + middle + 1)
+	{
+		copy[indexCopy--] = data[j--];
+	}
+	return left + right + count;
+}
+int InversePairs(vector<int> data)
+{
+	int length = data.size();
+	if (length <= 0)
+	{
+		return 0;
+	}
+	vector<int> copy;
+	for (int i = 0; i<length; ++i)
+	{
+		copy.push_back(data[i]);
+	}
+	long long count = InversePairs(data, copy, 0, length - 1);
+	return count % 1000000007;
+}
+*/
