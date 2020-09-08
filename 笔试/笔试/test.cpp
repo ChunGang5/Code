@@ -1090,88 +1090,90 @@ using namespace std;
 //}
 
 
-#include<iostream>
-#include<map>
-using namespace std;
-bool check(string& str)
-{
-	bool flag=true;
-	int i = 0;
-	while (str[i])
-	{
-		if (!isdigit(str[i++]))
-		{
-			flag = false;
-		}
-	}
-	return flag;
-}
-int main()
-{
-	int n = 0, k = 0;
-	int num;
-	cin >> n >> k;
-	num = k;
-	cin.get();
-	if ((n<1 && n>100000) || (k<1 && k>100000))
-	{
-		return 0;
-	}
-	map<string, int> Smap;
-	while (n--)
-	{
-		string str;
-		getline(cin, str);
-		if (check(str))
-		{
-			if (Smap.find(str) == Smap.end())
-			{
-				Smap.insert({ str, 1 });
-			}
-			else
-			{
-				Smap[str]++;
-			}
-		}
-	}
-	
-	multimap<int, string> swapmap;
-	auto it = Smap.begin();
-	while (it != Smap.end())
-	{
-		swapmap.insert({ (*it).second, (*it).first });
-		it++;
-	}
-	auto s_it = swapmap.begin();
-	while (k--)
-	{
-		if (s_it != swapmap.end())
-		{
-			cout << (*s_it).second << " " << (*s_it).first << endl;
-		}
-		s_it++;
-	}
-	auto s_e_it = swapmap.end();
-	k = num;
-	while (k--)
-	{
-		s_e_it--;
-	}
-	multimap<int, string> s_e_map;
-	k = num;
-	while (k--)
-	{
-		s_e_map.insert(make_pair((*s_e_it).first, (*s_e_it).second));
-		s_e_it++;
-	}
-	auto _it = s_e_map.begin();
-	while (_it!=s_e_map.end())
-	{
-		cout << (*_it).second << " " << (*_it).first << endl;
-		_it++;
-	}
-	return 0;
-}
+//#include<iostream>
+//#include<map>
+//using namespace std;
+//bool check(string& str)
+//{
+//	bool flag=true;
+//	int i = 0;
+//	while (str[i])
+//	{
+//		if (!isdigit(str[i++]))
+//		{
+//			flag = false;
+//		}
+//	}
+//	return flag;
+//}
+
+
+//int main()
+//{
+//	int n = 0, k = 0;
+//	int num;
+//	cin >> n >> k;
+//	num = k;
+//	cin.get();
+//	if ((n<1 && n>100000) || (k<1 && k>100000))
+//	{
+//		return 0;
+//	}
+//	map<string, int> Smap;
+//	while (n--)
+//	{
+//		string str;
+//		getline(cin, str);
+//		if (check(str))
+//		{
+//			if (Smap.find(str) == Smap.end())
+//			{
+//				Smap.insert({ str, 1 });
+//			}
+//			else
+//			{
+//				Smap[str]++;
+//			}
+//		}
+//	}
+//	
+//	multimap<int, string> swapmap;
+//	auto it = Smap.begin();
+//	while (it != Smap.end())
+//	{
+//		swapmap.insert({ (*it).second, (*it).first });
+//		it++;
+//	}
+//	auto s_it = swapmap.begin();
+//	while (k--)
+//	{
+//		if (s_it != swapmap.end())
+//		{
+//			cout << (*s_it).second << " " << (*s_it).first << endl;
+//		}
+//		s_it++;
+//	}
+//	auto s_e_it = swapmap.end();
+//	k = num;
+//	while (k--)
+//	{
+//		s_e_it--;
+//	}
+//	multimap<int, string> s_e_map;
+//	k = num;
+//	while (k--)
+//	{
+//		s_e_map.insert(make_pair((*s_e_it).first, (*s_e_it).second));
+//		s_e_it++;
+//	}
+//	auto _it = s_e_map.begin();
+//	while (_it!=s_e_map.end())
+//	{
+//		cout << (*_it).second << " " << (*_it).first << endl;
+//		_it++;
+//	}
+//	return 0;
+//}
 
 
 //#include<iostream>
@@ -1237,3 +1239,102 @@ int main()
 //	cout << endl;
 //	return 0;
 //}
+
+//
+//class Car
+//{
+//public:
+//	virtual void Drive();
+//};
+//class Benz :public Car
+//{
+//public:
+//	virtual void Drive()
+//	{
+//		cout << "Benz-ÊæÊÊ" << endl;
+//	}
+//};
+//class BMW :public Car
+//{
+//public:
+//	virtual void Drive()
+//	{
+//		cout << "BMW-²Ù¿Ø" << endl;
+//	}
+//};
+//void Test()
+//{
+//	Car* pBenz = new Benz;
+//	pBenz->Drive();
+//	Car* pBMW = new BMW;
+//	pBMW->Drive();
+//}
+//int main()
+//{
+//	Test();
+//	return 0;
+//}
+
+
+#include<iostream>
+#include<string>
+using namespace std;
+int Check(string str)
+{
+	int length = str.size();
+	if (length<8 || length>120)
+	{
+		return 1;
+	}
+	bool IsNumber = false;
+	bool IsUpperLetter = false;
+	bool IsLessLetter = false;
+	bool IsOther = false;
+	for (int i = 0; i < length; ++i)
+	{
+		if ('0' <= str[i]&& str[i] <= '9')
+		{
+			IsNumber = true;
+		}
+		else if (str[i]>='A' && str[i]= 'Z')
+		{
+			IsUpperLetter = true;
+		}
+		else if ('a' <= str[i]&&str[i] <= 'z')
+		{
+			IsLessLetter = true;
+		}
+		else 
+		{
+			IsOther = true;
+		}
+	}
+	if (IsNumber&&IsUpperLetter&&IsLessLetter&&IsOther)
+	{
+		return 0;
+	}
+	return 2;
+}
+int main()
+{
+	string str;
+	getline(cin, str);
+	string str_n;
+	int result = -1;
+	for (int i = 0; i < str.size(); ++i)
+	{
+		str_n.push_back(str[i]);
+		if (str[i] == ' ')
+		{
+			str_n.pop_back();
+			str_n.push_back('\n');
+			result = Check(str_n);
+			cout << result << endl;
+			str_n.clear();
+		}
+	}
+	str_n.push_back('\n');
+	result = Check(str_n);
+	cout << result << endl;
+	return 0;
+}
