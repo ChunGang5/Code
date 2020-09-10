@@ -1276,65 +1276,102 @@ using namespace std;
 //}
 
 
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//int Check(string str)
+//{
+//	int length = str.size();
+//	if (length<8 || length>120)
+//	{
+//		return 1;
+//	}
+//	bool IsNumber = false;
+//	bool IsUpperLetter = false;
+//	bool IsLessLetter = false;
+//	bool IsOther = false;
+//	for (int i = 0; i < length; ++i)
+//	{
+//		if ('0' <= str[i]&& str[i] <= '9')
+//		{
+//			IsNumber = true;
+//		}
+//		else if (str[i]>='A' && str[i]= 'Z')
+//		{
+//			IsUpperLetter = true;
+//		}
+//		else if ('a' <= str[i]&&str[i] <= 'z')
+//		{
+//			IsLessLetter = true;
+//		}
+//		else 
+//		{
+//			IsOther = true;
+//		}
+//	}
+//	if (IsNumber&&IsUpperLetter&&IsLessLetter&&IsOther)
+//	{
+//		return 0;
+//	}
+//	return 2;
+//}
+//int main()
+//{
+//	string str;
+//	getline(cin, str);
+//	string str_n;
+//	int result = -1;
+//	for (int i = 0; i < str.size(); ++i)
+//	{
+//		str_n.push_back(str[i]);
+//		if (str[i] == ' ')
+//		{
+//			str_n.pop_back();
+//			str_n.push_back('\n');
+//			result = Check(str_n);
+//			cout << result << endl;
+//			str_n.clear();
+//		}
+//	}
+//	str_n.push_back('\n');
+//	result = Check(str_n);
+//	cout << result << endl;
+//	return 0;
+//}
+
+
+
+
+
 #include<iostream>
-#include<string>
+#include<vector>
 using namespace std;
-int Check(string str)
+int NumBirSerTree(int n)
 {
-	int length = str.size();
-	if (length<8 || length>120)
-	{
-		return 1;
-	}
-	bool IsNumber = false;
-	bool IsUpperLetter = false;
-	bool IsLessLetter = false;
-	bool IsOther = false;
-	for (int i = 0; i < length; ++i)
-	{
-		if ('0' <= str[i]&& str[i] <= '9')
-		{
-			IsNumber = true;
-		}
-		else if (str[i]>='A' && str[i]= 'Z')
-		{
-			IsUpperLetter = true;
-		}
-		else if ('a' <= str[i]&&str[i] <= 'z')
-		{
-			IsLessLetter = true;
-		}
-		else 
-		{
-			IsOther = true;
-		}
-	}
-	if (IsNumber&&IsUpperLetter&&IsLessLetter&&IsOther)
+	if (n<1)
 	{
 		return 0;
 	}
-	return 2;
+	vector<int> dp(n + 1, -1);
+	dp[0] = 1;
+	dp[1] = 1;
+	int i, j;
+	for (i = 2; i <= n; ++i)
+	{
+		dp[i] = dp[i - 1] + pow(3, (i - 1));
+			/*for(j=0;j<i;++j)
+			{
+			dp[i]=dp[i]+dp[j]*dp[i-1-j];
+			}*/
+	}
+	return dp[n];
 }
 int main()
 {
-	string str;
-	getline(cin, str);
-	string str_n;
-	int result = -1;
-	for (int i = 0; i < str.size(); ++i)
-	{
-		str_n.push_back(str[i]);
-		if (str[i] == ' ')
-		{
-			str_n.pop_back();
-			str_n.push_back('\n');
-			result = Check(str_n);
-			cout << result << endl;
-			str_n.clear();
-		}
-	}
-	str_n.push_back('\n');
-	result = Check(str_n);
-	cout << result << endl;
+	int n = 0;
+	//cin >> n;
+	//int result = NumBirSerTree(n);
+	cout << pow(3,2) << endl;
+	cin.get();
 	return 0;
 }
