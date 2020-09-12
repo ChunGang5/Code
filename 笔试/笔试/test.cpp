@@ -1342,9 +1342,10 @@ using namespace std;
 
 
 
-
+/*
 #include<iostream>
 #include<vector>
+#include<math
 using namespace std;
 int NumBirSerTree(int n)
 {
@@ -1358,20 +1359,137 @@ int NumBirSerTree(int n)
 	int i, j;
 	for (i = 2; i <= n; ++i)
 	{
-		dp[i] = dp[i - 1] + pow(3, (i - 1));
-			/*for(j=0;j<i;++j)
-			{
-			dp[i]=dp[i]+dp[j]*dp[i-1-j];
-			}*/
+		dp[i] = dp[i - 1] + pow(3, (i-1));
 	}
 	return dp[n];
 }
 int main()
 {
 	int n = 0;
-	//cin >> n;
-	//int result = NumBirSerTree(n);
-	cout << pow(3,2) << endl;
+	cin >> n;
+	int result = NumBirSerTree(n);
+	cout << result << endl;
+	return 0;
+}
+*/
+
+//#include<iostream>
+//#include<string>
+//#include<math.h>
+//#include<unordered_map>
+//using namespace std;
+//int main()
+//{
+//	string str;
+//	unordered_map<char, int> Map = { { '0', 0 }, { '1', 1 }, { '2', 2 }, { '3', 3 }, { '4', 4 }, { '5', 5 }, { '6', 6 }, { '7', 7 }, { '8', 8 },
+//	{ '9', 9 }, { 'a', 10 }, { 'b', 11 }, { 'c', 12 }, { 'd', 13 }, { 'e', 14 }, { 'f', 15 }, { 'g', 16 }, { 'h', 17 }, { 'i', 18 }, { 'j', 19 }, 
+//	{ 'k', 20 },{ 'l', 21 }, { 'm', 22 }, { 'n', 23 }, { 'o', 24 }, { 'p', 25 }, { 'q', 26 }, { 'r', 27 }, { 's', 28 }, { 't', 29 }, { 'u', 30 }, { 'v', 31 }, 
+//	{ 'w', 32 }, { 'x', 33 }, { 'y', 34 }, { 'z', 35 } };
+//	getline(cin, str);
+//	int index = str.size()-1;
+//	long ans = 0;
+//	int i = 0;
+//	while (index > 0)
+//	{
+//		if (Map.find(str[index]) != Map.end())
+//		{
+//			ans += Map[str[index]]*pow(36,i);
+//		}
+//		++i;
+//	}
+//	cout << ans << endl;
+//	return 0;
+//}
+
+
+typedef struct Node
+{
+	int data;
+	Node *next;
+} Node;
+//写一个c函数将链表（如head->1->2->3->4）逆序
+/*
+Node* ReverseList(Node* head)
+{
+	if (head == NULL || head->next == NULL)
+	{
+		return head;
+	}
+	stack<Node*> st;
+	Node* cur = head->next;
+	while (cur)
+	{
+		st.push(cur);
+		cur = cur->next;
+	}
+	Node* pre = head;
+	head ->next= pre;
+	while (!st.empty())
+	{
+		cur = st.top();
+		st.pop();
+		pre = cur;
+		pre = pre->next;
+	}
+	pre = NULL;
+	return head;
+
+
+	Node* pre = NULL;
+	Node* cur = head->next;
+	Node* next = NULL;
+	while (cur)
+	{
+		next = cur->next;
+		cur->next = pre;
+		pre = cur;
+		cur = next;
+	}
+	return pre;
+}
+*/
+//void insertSort(int array[], int size)
+//{
+//	int left = 0;
+//	int right = left+1;
+//	int temp = 0;
+//	while (right<size)
+//	{
+//		int i = 0;
+//		while (i <= left)
+//		{
+//			if (array[i]<= array[right])
+//			{
+//				++i;
+//			}
+//		}
+//		temp = array[i];
+//		array[i] = array[right];
+//		array[right] = temp;
+//		++left;
+//		++right;
+//	}
+//}
+
+#include<iostream>
+#include<stack>
+using namespace std;
+int main()
+{
+	/*string s1 = "abcde";
+	string s2;
+	if (true)
+	{
+		string s3 = "aawd";
+		s2 = s3;
+	}
+	cout << s2;
+	cin.get();*/
+	/*#define max 45
+	max = 32;*/
+	int x = 1, y = 0, z = 5;
+	int a = (x&&y) || z++;
+	cout << z << endl;
 	cin.get();
 	return 0;
 }
