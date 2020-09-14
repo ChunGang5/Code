@@ -1401,14 +1401,14 @@ int main()
 //	return 0;
 //}
 
-
+/*
 typedef struct Node
 {
 	int data;
 	Node *next;
 } Node;
 //Ð´Ò»¸öcº¯Êý½«Á´±í£¨Èçhead->1->2->3->4£©ÄæÐò
-/*
+
 Node* ReverseList(Node* head)
 {
 	if (head == NULL || head->next == NULL)
@@ -1471,12 +1471,13 @@ Node* ReverseList(Node* head)
 //	}
 //}
 
+/*
 #include<iostream>
 #include<stack>
 using namespace std;
 int main()
 {
-	/*string s1 = "abcde";
+	string s1 = "abcde";
 	string s2;
 	if (true)
 	{
@@ -1484,12 +1485,305 @@ int main()
 		s2 = s3;
 	}
 	cout << s2;
-	cin.get();*/
-	/*#define max 45
-	max = 32;*/
+	cin.get();
+	#define max 45
+	max = 32;
 	int x = 1, y = 0, z = 5;
 	int a = (x&&y) || z++;
 	cout << z << endl;
 	cin.get();
+	return 0;
+}
+
+*/
+
+
+/*
+#include<string>
+#include<iostream>
+#include<algorithm>
+using namespace std;
+int main()
+{
+	int n = -1;
+	string str;
+	cin >> n;
+	cin.get();
+	getline(cin, str);
+	int begin = 0;
+	int end = n;
+	while (begin < str.size()&&end<str.size())
+	{
+		reverse(str.begin()+begin, str.begin()+end);
+		begin += n;
+		end += n;
+	}
+	reverse(str.begin() + begin, str.end());
+	cout << str << endl;
+	return 0;
+}
+*/
+
+/*
+#include<iostream>
+#include<string>
+#include<algorithm>
+#include<vector>
+using namespace std;
+int main()
+{
+	int T = -1;
+	cin >> T;
+	cin.get();
+	while (T--)
+	{
+		int n;
+		int m;
+		int k;
+		cin >> n >> m >> k;
+		vector<int> v1;
+		vector<vector<int>> v(m, vector<int>(3));
+		for (int i = 0; i < m; ++i)
+		{
+			for (int j = 0; j < 3; ++j)
+			{
+				cin >> v[i][j];
+			}
+		}
+		for (int i = 0; i < m; ++i)
+		{
+			if (v[i][2] <= k)
+			{
+				v1.push_back(v[i][0]);
+				v1.push_back(v[i][1]);
+			}
+		}
+		sort(v1.begin(), v1.end());
+		if (v1.size()>1)
+		{
+			for (int i = 0; i < v1.size()-1; ++i)
+			{
+				if (v1[i] == v1[i + 1])
+				{
+					v1.erase(v1.begin() + i + 1);
+					i--;
+				}
+			}
+		}
+		if (v1.size() != n)
+		{
+			cout << "No" << endl;
+		}
+		else
+		{
+			cout << "Yes" << endl;
+		}
+	}
+	return 0;
+}
+*/
+
+
+/*
+#include<string>
+#include<iostream>
+#include<vector>
+#include <limits>
+using namespace std;
+int OneNum(int num)
+{
+	int count = 0;
+	while (num)
+	{
+		count += 1;
+		num &= (num - 1);
+	}
+	return count;
+}
+
+vector < int > findNumber(int num)
+{
+	vector<int> result(0);
+	int MinNum = 0;
+	int MaxNum = num;
+	MinNum = num;
+	int count = OneNum(num);
+	bool flag = false;
+	while (++MaxNum)
+	{
+		if ((1 <= MaxNum <= 2147483647))
+		{
+			if (count == (OneNum(MaxNum)))
+			{
+				flag = true;
+				break;
+			}
+		}
+		else
+		{
+			result.push_back(-1);
+			return result;
+		}
+	}
+	if (flag)
+	{
+		result.push_back(MaxNum);
+		flag = false;
+	}
+	while (--MinNum)
+	{
+		if (1 <= MinNum <= 2147483647)
+		{
+			if (count == (OneNum(MinNum)))
+			{
+				flag = true;
+				break;
+			}
+		}
+		else
+		{
+			result.pop_back();
+			result.push_back(-1);
+			return result;
+		}
+	}
+	if (flag)
+	{
+		result.push_back(MinNum);
+	}
+	return result;
+}
+
+int main()
+{
+	int num = 15;
+	int count = 0;
+	count = OneNum(num);
+	cout << count << endl;
+	cin.get();
+	return 0;
+}
+*/
+
+/*
+#include<algorithm>
+
+
+	
+	* ÕÒ³ö×Ö·û´®ÖÐ×î´ó¹«¹²×Ó×Ö·û´®
+	* @param str1 string×Ö·û´® ÊäÈë×Ö·û´®1
+	* @param str2 string×Ö·û´® ÊäÈë×Ö·û´®2
+	* @return string×Ö·û´®
+	
+	string GetCommon(string str1, string str2)
+	{
+		string result;
+		if (str1.size() == 0 || str2.size() == 0)
+		{
+			return result;
+		}
+		int index = -1;
+		int MaxLength = 0;
+		for (int i = 0; i<str1.size(); ++i)
+		{
+			for (int j = 0; j<str2.size(); ++j)
+			{
+				if (str1[i] == str2[j])
+				{
+					int n = 1;
+					while (str1[i + n] == str2[j + n] && str1[n + i] != '\0')
+					{
+						n++;
+					}
+					if (n>MaxLength)
+					{
+						index = i;
+						MaxLength = n;
+					}
+				}
+			}
+		}
+		if (index == -1)
+		{
+			return result;
+		}
+		else
+		{
+			int i = 0;
+			while (MaxLength--)
+			{
+				result[i++] = str1[index++];
+			}
+			result.push_back('\0');
+			return result;
+		}
+	}
+	int main()
+	{
+		string s1 = "abccade", str2 = "dgcadde";
+		GetCommon(s1, str2);
+		cin.get();
+		return 0;
+	}
+	*/
+
+
+#include<iostream>
+#include<vector>
+#include<math.h>
+#include<algorithm>
+using namespace std;
+int main()
+{
+	int T = 0;
+	cin >> T;
+	cin.get();
+	while (T--)
+	{
+		int n, m;
+		cin >> n >> m;
+		vector<int> food;
+		for (int i = 0; i < n; ++i)
+		{
+			int num = 0;
+			cin >> num;
+			food.push_back(num);
+		}
+		vector<vector<int>> dp(n+1, vector<int>(n+1, 0));
+		dp[0][0] = 0;
+		for (int i = 0; i <= n; ++i)
+		{
+			dp[0][i] = 0;
+			dp[i][0] = 0;
+		}
+		int x1, x2;
+		for (int i = 0; i <= n; ++i)
+		{
+			for (int j = 1; j <= n; ++j)
+			{
+				if (j > i)
+				{
+					dp[i][j] = dp[i][j - 1];
+				}
+				else
+				{
+					dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - 1] + food[i - 1]);
+				}
+				if (dp[i][j] >= m)
+				{
+					x1 = i - 1;
+					x2 = i;
+				}
+			}
+		}
+		if (dp[n][n] < m)
+		{
+			return -1;
+		}
+		else
+		{
+			cout << x1 << x2 << endl;
+		}
+	}
 	return 0;
 }
