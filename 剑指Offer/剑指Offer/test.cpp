@@ -1159,3 +1159,109 @@ int InversePairs(vector<int> data)
 	return count % 1000000007;
 }
 */
+
+
+
+#include<iostream>
+#include<string>
+#include<stack>
+using namespace std;
+/*
+string baseNeg2(int N)
+{
+	string str = "0";
+	if (N == 0)
+	{
+		return str;
+	}
+	stack<char> st;
+	str.clear();
+	while (N)
+	{
+		if (N <= 1)
+		{
+			st.push('1');
+			break;
+		}
+		else
+		{
+			char c = '0' + (N % 2);
+			st.push(c);
+			N /= 2;
+		}
+	}
+	st.push('1');
+	while (!st.empty())
+	{
+		char s = st.top();
+		st.pop();
+		str.push_back(s);
+	}
+	return str;
+}
+*/
+int minInsertions(string s)
+{
+	if (s.empty())
+	{
+		return 0;
+	}
+	int Lcount = 0;
+	int Rcount = 0;
+	auto it = s.begin();
+	while (it != s.end())
+	{
+		if (*it == '(')
+		{
+			++Lcount;
+		}
+		break;
+	}
+
+}
+int main()
+{
+	int N = 3;
+
+	cin.get();
+	return 0;
+}
+
+bool check(int i, int j, int k)
+{
+	int row = 0;
+	int col = 0;
+	while (i)
+	{
+		row += i % 10;
+		i /= 10;
+	}
+	while (j)
+	{
+		col += i % 10;
+		j /= 10;
+	}
+	if ((row + col) <= k)
+	{
+		return true;
+	}
+	return false;
+}
+int movingCount(int m, int n, int k)
+{
+	if (m <= 0 || n <= 0 || k<0)
+	{
+		return 0;
+	}
+	int count = 0;
+	int i = 0;
+	int j = 0;
+	while ((i >= 0 && i<m) && (0 <= j&&j<n))
+	{
+		if (check(i, j, k) || check(i + 1, j) || check(i - 1, j) || check(i, j + 1, k) || check(i, j - 1, k))
+		{
+			++count;
+		}
+	}
+	return count;
+}
