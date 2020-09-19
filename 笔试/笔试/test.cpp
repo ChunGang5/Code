@@ -1725,7 +1725,7 @@ int main()
 		cin.get();
 		return 0;
 	}
-	*/
+	
 
 
 #include<iostream>
@@ -1786,4 +1786,51 @@ int main()
 		}
 	}
 	return 0;
+}
+
+
+#include<iostream>
+using namespace std;
+class A
+{
+public:
+	A()
+	{
+		cout << "A" << endl;
+	}
+	~A()
+	{
+		cout << "~A" << endl;
+	}
+};
+class B :public A
+{
+public:
+	B(A &a) 
+		:_a(a)
+	{
+		cout << "B" << endl;
+	}
+	~B()
+	{
+		cout << "~B" << endl;
+	}
+private:
+	A _a;
+};
+int main()
+{
+	A a;
+	B b(a);
+	cin.get();
+	return 0;
+}
+*/
+
+#include<iostream>
+#include<vector>
+using namespace std;
+int main()
+{
+
 }
