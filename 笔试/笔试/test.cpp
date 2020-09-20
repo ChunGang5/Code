@@ -1828,9 +1828,33 @@ int main()
 */
 
 #include<iostream>
-#include<vector>
+#include<string>
 using namespace std;
 int main()
 {
-
+	string s1, s2;
+	getline(cin, s1);
+	getline(cin, s2);
+	int count = 0;
+	auto it1 = s1.begin();
+	auto it2 = s2.begin();
+	while (it1 != s1.end())
+	{
+		while (it2 != s2.end())
+		{
+			if (*it1 == *it2)
+			{
+				++count;
+				it2 = s2.erase(it2);
+				break;
+			}
+			else
+			{
+				++it2;
+			}
+		}
+		++it1;
+	}
+	cout << count << endl;
+	return 0;
 }
