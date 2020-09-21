@@ -1827,6 +1827,7 @@ int main()
 }
 */
 
+/*
 #include<iostream>
 #include<string>
 using namespace std;
@@ -1837,9 +1838,9 @@ int main()
 	getline(cin, s2);
 	int count = 0;
 	auto it1 = s1.begin();
-	auto it2 = s2.begin();
 	while (it1 != s1.end())
 	{
+		auto it2 = s2.begin();
 		while (it2 != s2.end())
 		{
 			if (*it1 == *it2)
@@ -1856,5 +1857,121 @@ int main()
 		++it1;
 	}
 	cout << count << endl;
+	return 0;
+}
+
+
+#include<iostream>
+#include<string>
+using namespace std;
+int main()
+{
+	int n = 0;
+	cin>>n;
+	cin.get();
+	while (n--)
+	{
+		string str;
+		getline(cin, str);
+		int count = 0;
+		for (int i = 0; i < 3; ++i)
+		{
+			for (int j = i; j < str.size(); j += 3)
+			{
+				if (str[i] != str[j])
+				{
+					++count;
+					break;
+				}
+			}
+		}
+		if (count>1)
+		{
+			cout << "No" << endl;
+		}
+		else
+		{
+			cout << "Yes" << endl;
+		}
+	}
+	return 0;
+}
+
+
+#include<iostream>
+#include<string>
+#include<vector>
+using namespace std;
+int main()
+{
+	string str;
+	getline(cin, str);
+	if (str.empty())
+	{
+		cout<<""<<endl;
+	}
+	int n = str.size();
+	int begin = 0;
+	int Maxlen = 1;
+	vector<vector<bool>> dp(n, vector<bool>(n, false));
+	for (int i = 0; i<n; ++i)
+	{
+		for (int j = 0; j <= i; ++j)
+		{
+			if (i - j<2)
+			{
+				dp[j][i] = (str[j] == str[i]);
+			}
+			else if (i - j >= 2)
+			{
+				dp[j][i] = ((str[j] == str[i]) && (dp[j + 1][i - 1]));
+			}
+			if (dp[j][i] && Maxlen<i - j + 1)
+			{
+				Maxlen = i - j + 1;
+				begin = j;
+			}
+		}
+	}
+	cout<< str.substr(begin, Maxlen)<<endl;
+	return 0;
+}
+
+*/
+
+#include<iostream>
+#include<string>
+using namespace std;
+int main()
+{
+	string str;
+	getline(cin, str);
+	int len = str.size();
+	string instr;
+	string result;
+	for (int i = 0; i<len; ++i)
+	{
+		for (int j = i + 1; j < len; ++j)
+		{
+			instr = str.substr(i, j);
+			if (j == len)
+			{
+				if (result.size() < instr.size())
+				{
+					result = instr;
+				}
+				break;
+			}
+			else
+			{
+				if (str.find(instr.substr(j, j + 1)) != string::npos && j<len)
+				{
+					result = result.size() < instr.size() ? instr : result;
+					break;
+				}
+			}
+		}
+	}
+	cout << result << endl;
 	return 0;
 }
