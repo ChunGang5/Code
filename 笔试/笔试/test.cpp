@@ -1937,7 +1937,7 @@ int main()
 	return 0;
 }
 
-*/
+
 
 #include<iostream>
 #include<string>
@@ -1973,5 +1973,19 @@ int main()
 		}
 	}
 	cout << result << endl;
+	return 0;
+}
+*/
+#include<stdio.h>
+#define SQR(a) a*a
+
+int main()
+{
+	int MyArray[5] = { 1, 2, 3, 4, 5 };
+	for (int &x : MyArray)
+	{
+		x *= 2;
+		printf("%d", x);
+	}
 	return 0;
 }
