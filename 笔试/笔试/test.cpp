@@ -1975,7 +1975,9 @@ int main()
 	cout << result << endl;
 	return 0;
 }
-*/
+
+
+#include<limits>
 #include<stdio.h>
 #define SQR(a) a*a
 
@@ -1987,5 +1989,68 @@ int main()
 		x *= 2;
 		printf("%d", x);
 	}
+	INT_MAX;
+	return 0;
+}
+
+
+#include<iostream>
+#include<vector>
+#include<string>
+#include<algorithm>
+using namespace std;
+string IntToString(int num)
+{
+	string result;
+	while (num)
+	{
+		int n = num % 10;
+		char c = '0' + n;
+		num /= 10;
+		result.push_back(c);
+	}
+	return result;
+}
+int main()
+{
+	vector<int> nums;
+	for (int i = 0; i < 10; ++i)
+	{
+		int num = 0;
+		cin >> num;
+		nums.push_back(num);
+	}
+	sort(nums.begin(), nums.end());
+	int n = 4;
+	auto it = nums.end();
+	--it;
+	string str;
+	while (n--)
+	{
+		int temp = *it--;
+		str += IntToString(temp);
+	}
+	cout << str << endl;
+	return 0;
+}
+*/
+
+#include<iostream>
+#include<cstdlib>
+using namespace std;
+int main()
+{
+	vector<char> array = { 'A', 'A', 'A', 'A', 'B', 'B', 'B','C', 'C', 'D'};
+	int num1,num2;
+	while (1)
+	{
+		num1 = rand() % 6 + 1;
+		num2 = rand() % 6 + 1;
+		if (num1 != num2)
+		{
+			break;
+		}
+	}
+	cout << array[num1] << array[num2] << endl;
 	return 0;
 }
