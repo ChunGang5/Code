@@ -2033,7 +2033,7 @@ int main()
 	cout << str << endl;
 	return 0;
 }
-*/
+
 
 #include<iostream>
 #include<cstdlib>
@@ -2052,5 +2052,214 @@ int main()
 		}
 	}
 	cout << array[num1] << array[num2] << endl;
+	return 0;
+}
+
+
+#include<iostream>
+using namespace std;
+int comboOf(int cash)
+{
+	if (cash < 0)
+	{
+		return 0;
+	}
+	if (cash==0||cash == 1 || cash == 2 || cash == 5)
+	{
+		return 1;
+	}
+	return comboOf(cash - 1) + comboOf(cash - 2) + comboOf(cash - 5);
+
+}
+
+
+
+int main() {
+	int res;
+
+	int _cash;
+	cin >> _cash;
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+
+
+	res = comboOf(_cash);
+	cout << res << endl;
+	cin.get();
+	return 0;
+
+}
+
+
+#include<iostream>
+#include<string>
+#include<vector>
+using namespace std;
+void Rottor(vector<string>& s)
+{
+	int n = s.size();
+	vector<string> temp = s;
+	for (int row = 0; row < n; ++row)
+	{
+		for (int col = 0; col < n; ++col)
+		{
+			temp[row][col] = s[n - 1 - col][row];
+		}
+	}
+	for (int row = 0; row < n; ++row)
+	{
+		for (int col = 0; col < n; ++col)
+		{
+			s[row][col] = temp[row][col];
+		}
+	}
+}
+string rotateCode(vector<string> s1, vector<string> s2)
+{
+	string str;
+	int N = s1.size();
+	for (int i = 0; i < N; ++i)
+	{
+		for (int j = 0; j < N; ++j)
+		{
+			if (s1[i][j] == '0')
+			{
+				char c = s2[i][j];
+				str.push_back(c);
+			}
+		}
+	}
+	return str;
+}
+string rotatePassword(vector<string>& s1, vector<string>& s2)
+{
+	string result;
+	result += rotateCode(s1, s2);
+	Rottor(s1);
+	result += rotateCode(s1, s2);
+	Rottor(s1);
+	result += rotateCode(s1, s2);
+	Rottor(s1);
+	result += rotateCode(s1, s2);
+	return result;
+}
+int main()
+{
+	string s1, s2;
+
+}
+
+
+
+struct Interval 
+{
+	int start;
+	int end;
+};
+
+#include<iostream>
+#include<string>
+using namespace std;
+
+Interval solve(int n, int k, string str1, string str2)
+{
+	Interval result;
+	int count = 0;
+	int L1 = str1.size();
+	int L2 = str2.size();
+	int N = L1;
+	if (L1 > L2)
+	{
+		N = L2;
+	}
+	for (int i = 0; i < N; ++i)
+	{
+		if (str1[i] == str2[i])
+		{
+			++count;
+		}
+	}
+	if (n == k)
+	{
+		if (count == k)
+		{
+			result.start = k;
+			result.end = k;
+			
+		}
+		else
+		{
+			result.start = count;
+			result.end = count;
+		}
+	}
+	else if (k==0)
+	{
+		if (count ==n)
+		{
+			result.start = 0;
+			result.end = 0;
+		}
+		else
+		{
+			result.start = 0;
+			result.end = n - count;
+		}
+	}
+	else
+	{
+		if (count == n)
+		{
+			result.start = k;
+			result.end = k;
+		}
+		else if (count==0)
+		{
+			result.start = 0;
+			result.end = n - k - count;
+		}
+		else if (count<k)
+		{
+			result.start = 0;
+			result.end = (k - count) + (n - k);
+		}
+		else
+		{
+			result.start = 0;
+		}
+	}
+	return result;
+}
+int main()
+{
+
+}
+*/
+
+
+#include<iostream>
+using namespace std;
+int main()
+{
+	int num = 0;
+	cin >> num;
+	int count = 0;
+	for (int i = 2; i <= num; ++i)
+	{
+		while (num != i)
+		{
+			if (num%i == 0)
+			{
+				++count;
+				num /= i;
+			}
+			else
+			{
+				break;
+			}
+		}
+	}
+	++count;
+	cout << count << endl;
 	return 0;
 }
