@@ -2234,7 +2234,7 @@ int main()
 {
 
 }
-*/
+
 
 
 #include<iostream>
@@ -2261,5 +2261,32 @@ int main()
 	}
 	++count;
 	cout << count << endl;
+	return 0;
+}
+*/
+
+class  A
+{
+public:
+	void Func()
+	{
+		cout << "A.Func" << endl;
+	}
+};
+class B :public A
+{
+public:
+	void Func()
+	{
+		cout << "B.Func" << endl;
+	}
+};
+int main()
+{
+	B b;
+	A* a = &b;
+	b.Func();
+	a->Func();
+	cin.get();
 	return 0;
 }
