@@ -2263,7 +2263,7 @@ int main()
 	cout << count << endl;
 	return 0;
 }
-*/
+
 
 class  A
 {
@@ -2288,5 +2288,130 @@ int main()
 	b.Func();
 	a->Func();
 	cin.get();
+	return 0;
+}
+
+#include<iostream>
+#include<string>
+#include<unordered_map>
+#include<algorithm>
+using namespace std;
+int main()
+{
+	string str;
+	int i=0, j=0, num=0;
+	getline(cin, str);
+	int len = str.length();
+	str += str;
+	int Min = len;
+	unordered_map<int, int> book;
+	while (1)
+	{
+		while (i < str.size() && num < 5)
+		{
+			if ((str[i] == 'A' || str[i] == 'B' || str[i] == 'C' || str[i] == 'D' || str[i] == 'E') && (book[str[i]]++ == 0))
+			{
+				num++;
+			}
+			i++;
+		}
+		if (num < 5)
+		{
+			break;
+		}
+		Min = min(Min, i - j);
+		if ((str[j] == 'A' || str[j] == 'B' || str[j] == 'C' || str[j] == 'D' || str[j] == 'E') && --book[str[j]]==0)
+		{
+			--num;
+		}
+		j++;
+	}
+	cout << len-Min << endl;
+	return 0;
+}
+
+
+#include<iostream>
+#include<string>
+#include<vector>
+#include<unordered_map>
+using namespace std;
+int main()
+{
+	string str;
+	getline(cin, str);
+	unordered_map<char, int> Map;
+	auto it = str.begin();
+	while (it != str.end())
+	{
+		if (Map.find(*it) == Map.begin())
+		{
+			Map.insert({ *it, 1 });
+		}
+		else
+		{
+			Map[*it]++;
+		}
+		++it;
+	}
+	vector<char> v;
+	auto _it = Map.begin();
+
+	while (_it != Map.end())
+	{
+		if (_it->second >= 3 && _it->second <= 5)
+		{
+			v.push_back(_it->first);
+		}
+		++_it;
+	}
+	if (v.size() == 0)
+	{
+		cout << "no" << endl;
+	}
+	else
+	{
+		for (int i = v.size()-1; i >= 0; --i)
+		{
+			cout << v[i];
+		}
+		cout << endl;
+	}
+	return 0;
+}
+*/
+
+#include<iostream>
+#include<string>
+using namespace std;
+int main()
+{
+	int arr[256] = { 0 };
+	string str;
+	vector<char> v;
+	getline(cin,str);
+	for (int i = 0; i < str.size(); ++i)
+	{
+		arr[str[i]]++;
+	}
+	for (int i = 0; i < 256; ++i)
+	{
+		if (arr[i] >= 3 && arr[i] <= 5)
+		{
+			v.push_back((char)i);
+		}
+	}
+	if (v.size() == 0)
+	{
+		cout << "no" << endl;
+	}
+	else
+	{
+		for (int i = v.size() - 1; i >= 0; --i)
+		{
+			cout << v[i];
+		}
+		cout << endl;
+	}
 	return 0;
 }
