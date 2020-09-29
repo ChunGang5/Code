@@ -2379,7 +2379,7 @@ int main()
 	}
 	return 0;
 }
-*/
+
 
 #include<iostream>
 #include<string>
@@ -2413,5 +2413,65 @@ int main()
 		}
 		cout << endl;
 	}
+	return 0;
+}
+
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+int main()
+{
+	int n, m;
+	cin >> n;
+	vector<int> L1;
+	while (n--)
+	{
+		int num = 0;
+		cin >> num;
+		L1.push_back(num);
+	}
+	cin >> m;
+	while (m--)
+	{
+		int num = 0;
+		cin >> num;
+		L1.push_back(num);
+	}
+	sort(L1.begin(), L1.end());
+	for (int i = 0; i < L1.size(); ++i)
+	{
+		cout << L1[i];
+	}
+	cout << endl;
+	return 0;
+}
+*/
+
+#include<iostream>
+#include<string>
+using namespace std;
+int main()
+{
+	string str;
+	getline(cin, str);
+	int begin = 0, end = 0;
+	string result;
+	while (begin <= end&&end < str.size())
+	{
+		int count = 0;
+		while (str[begin] == str[end])
+		{
+			++count;
+			++end;
+		}
+		result.push_back(str[begin]);
+		result.push_back('_');
+		result.push_back('0' + count);
+		result.push_back('_');
+		begin = end;
+	}
+	result.pop_back();
+	cout << result << endl;
 	return 0;
 }
