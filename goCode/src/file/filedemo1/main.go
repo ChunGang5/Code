@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"os"
 )
 
 // func main() {
@@ -73,16 +73,39 @@ import (
 // 	writer.Flush()
 // }
 
-func main() {
-	filePath1 := "d:/abc.txt"
-	filePath2 := "d:/kkk.txt"
-	data, err := ioutil.ReadFile(filePath1)
-	if err != nil {
-		fmt.Printf("read file error: %v\n", err)
-		return
+// func main() {
+// 	filePath1 := "d:/abc.txt"
+// 	filePath2 := "d:/kkk.txt"
+// 	data, err := ioutil.ReadFile(filePath1)
+// 	if err != nil {
+// 		fmt.Printf("read file error: %v\n", err)
+// 		return
+// 	}
+// 	err = ioutil.WriteFile(filePath2, data, 0666)
+// 	if err != nil {
+// 		fmt.Printf("write file error: %v\n", err)
+// 	}
+// }
+
+//判断文件是否存在
+func PathExists(path string) (bool, error) {
+	_, err := os.Stat(path)
+	if err == nil {
+		return true, nil
+	} else if os.IsNotExist(err) {
+		return false, nil
+	} else {
+		return false, err
 	}
-	err = ioutil.WriteFile(filePath2, data, 0666)
-	if err != nil {
-		fmt.Printf("write file error: %v\n", err)
+}
+func main() {
+	pathFile := "d:/aija.txt"
+	falg, err := PathExists(pathFile)
+	if falg == true && err == nil {
+		fmt.Println("文件存在")
+	} else if falg == false && err == nil {
+		fmt.Println("文件不存在")
+	} else {
+		fmt.Println("不能确定！")
 	}
 }
