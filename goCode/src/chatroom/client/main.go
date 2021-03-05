@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-var userId string
+var userId int
 var userPwd string
 
 func main() {
@@ -39,15 +39,15 @@ func main() {
 
 	if key == 1 {
 		fmt.Println("请输入用户的id")
-		fmt.Scanf("%s\n", &userId)
+		fmt.Scanf("%d\n", &userId)
 		fmt.Println("请输入用户的密码")
 		fmt.Scanf("%s\n", &userPwd)
-		err := login(userId, userPwd)
-		if err != nil {
-			fmt.Println("用户注册失败：", err)
-		} else {
-			fmt.Println("登录成功")
-		}
+		login(userId, userPwd)
+		// if err != nil {
+		// 	fmt.Println("用户注册失败：", err)
+		// } else {
+		// 	fmt.Println("登录成功")
+		// }
 	} else if key == 2 {
 		fmt.Println("用户注册")
 	}
