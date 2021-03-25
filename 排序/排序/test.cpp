@@ -19,21 +19,22 @@ using namespace std;
 //	}
 //}
 
-void InserSort(int arr[], int size)
+void InserSort(int arr[], int n)
 {
 	int key;
-	for (int i = 1; i < size; ++i)
+	for (int i = 1; i < n; i++)	//五个数只需要排四次
 	{
 		key = arr[i];
-		int end = i - 1;
+		int end = i - 1;	//end：前面有序数组的最后一位
 		while (arr[end]>key&&end >= 0)
 		{
-			arr[end + 1] = arr[end];
-			--end;
+			arr[end + 1] = arr[end];	//将比key大的数往后挪
+			end--;
 		}
-		arr[end + 1] = key;
+		arr[end+1] = key;	//最终找到要插入的位置，放入key
 	}
 }
+
 
 //希尔排序
 //void ShellSort(int arr[], int n,int gap)	//差
@@ -57,24 +58,25 @@ void InserSort(int arr[], int size)
 //	
 //}
 
-void ShellSort(int arr[], int size, int gap)
+void shellSrot(int arr[], int n,int gap)
 {
-	int key;
 	while (gap >= 1)
 	{
-		for (int i = gap; i < size; ++i)
+		int key;
+		for (int i = gap; i < n; i++)
 		{
-			key = arr[i];
-			int end = i - gap;
-			while (arr[end] >key && end >= 0)
+			key = arr[i];	//选取要插入的数key
+			int end = i - gap;	//找到前面待插入有序数组的最后一位
+			while (arr[end]>key&&end >= 0)
 			{
-				arr[end + gap] = arr[end];
-				--end;
+				arr[end + gap] = arr[end];	//将比key大的数往后挪
+				end -= gap;	
 			}
-			arr[end] = key;
+			arr[end + gap] = key;	//找到要插入的位置
 		}
-		--gap;
+		gap--;
 	}
+
 }
 
 //直接选择排序
@@ -99,20 +101,20 @@ void ShellSort(int arr[], int size, int gap)
 //	}
 //}
 
-void QuickSelectSort(int arr[], int size)
+void quickSelectSort(int arr[], int n)
 {
-	int min;
-	int temp;
-	for (int i = 0; i < size - 1; ++i)
+	for (int i = 0; i < n - 1; i++)	//控制寻找最小元素的次数，n个只需要找到n-1个最值就行
 	{
-		for (int j = i + 1; j < size; ++j)
+		int min=i;	//假设本次最小的数的下标是i
+		int temp;
+		for (int j = i + 1; j < n; j++)
 		{
-			min = i;
 			if (arr[j] < arr[min])
 			{
 				min = j;
 			}
 		}
+		//交换放在外层，内部for只是找出最值的下标
 		temp = arr[i];
 		arr[i] = arr[min];
 		arr[min] = temp;
@@ -161,20 +163,22 @@ void QuickSelectSort(int arr[], int size)
 //		end--;
 //	}
 //}
-void Adjuect(int arr[], int size, int parent)
+void HeapAdjuct(int arr[], int size, int parent)
 {
+	//优先标记左孩子，因为堆底层是完全二叉树，完全二叉树可能没有右孩子
 	int child = parent * 2 + 1;
-	while (child < size)
+	while (child<size)
 	{
-		if (child + 1 < size&&arr[child + 1] > arr[child])
+		//找两个孩子中较大的那个
+		if (child+1<size&&arr[child + 1] > arr[child])	//保证右孩子存在之后再比较
 		{
-			child += 1;
+			child = child + 1;
 		}
-		if (arr[child]>arr[parent])
+		if (arr[parent] < arr[child])
 		{
-			int temp = arr[parent];
-			arr[parent] = arr[child];
-			arr[child] = temp;
+			int temp = arr[child];
+			arr[child] = arr[parent];
+			arr[parent] = temp;
 			parent = child;
 			child = parent * 2 + 1;
 		}
@@ -184,22 +188,27 @@ void Adjuect(int arr[], int size, int parent)
 		}
 	}
 }
-void HeepSort(int arr[], int size)
+void HeapSort(int arr[], int size)
 {
-	for (int root = (size - 2) >> 1; root >= 0; --root)
+	//找到第一个非叶子节点
+	for (int root = (size - 2) >> 1; root >= 0; root--)
 	{
-		Adjuect(arr, size, root);
+		HeapAdjuct(arr, size, root);
 	}
+	//采用堆删除的思想来排序，升序大根堆，根节点与最后一个节点互换，树的有效节点-1
 	int end = size - 1;
 	while (end)
 	{
-		int temp = arr[0];
-		arr[0] = arr[end];
-		arr[end] = temp;
-		Adjuect(arr, end, 0);
-		end -- ;
+		//根节点是最大的数
+		int temp = arr[end];
+		arr[end] = arr[0];
+		arr[0] = temp;
+		HeapAdjuct(arr, end, 0);
+		end--;	//end--一定要写在调整函数后面，因为end已经是size-1之后的了，size是有效数字个数，不是下标
 	}
+
 }
+
 
 //冒泡排序
 //void BubbleSort(int arr[], int n)
@@ -218,17 +227,17 @@ void HeepSort(int arr[], int size)
 //	}
 //}
 
-void BubbleSort(int arr[], int size)
+void BubbleSort(int arr[], int n)
 {
-	for (int i = 1; i < size; ++i)
+	for (int i = 1; i < n; i++)	//控制比较次数n-1次
 	{
-		for (int j = 0; j < size - i; ++j)
+		for (int j = 0; j < n - i; j++)		//不管已经排好序的
 		{
 			if (arr[j]>arr[j + 1])
 			{
 				int temp = arr[j];
-				arr[j + 1] = arr[j];
-				arr[j] = temp;
+				arr[j] = arr[j + 1];
+				arr[j + 1] = temp;
 			}
 		}
 	}
@@ -279,27 +288,28 @@ void BubbleSort(int arr[], int size)
 //		QuickSort(arr, k + 1, j);
 //	}
 //}
-int SortCode(int arr[], int i, int j)
+int partition(int arr[], int i, int j)
 {
 	int key = arr[i];
 	while (i < j)
 	{
-		while (arr[j] >= key&&i<j)
+		while (arr[j] >= key&&i < j)
 		{
-			--j;
+			j--;
 		}
 		if (i < j)
 		{
 			arr[i] = arr[j];
-			++i;
+			i++;
 		}
-		while (arr[i] <= key)
+		while (arr[i] <= key&&i < j)
 		{
-			++i;
+			i++;
 		}
 		if (i < j)
 		{
 			arr[j] = arr[i];
+			j--;
 		}
 	}
 	arr[i] = key;
@@ -310,11 +320,13 @@ void QuickSort(int arr[], int i,int j)
 	int k;
 	while (i < j)
 	{
-		k = SortCode(arr, i, j);
-		QuickSort(arr, i, k - 1);
+		k = partition(arr, i, j);
+		QuickSort(arr, 0, k - 1);
 		QuickSort(arr, k + 1, j);
 	}
 }
+//QuickSort(arr, 0, n - 1);
+
 
 ////归并排序
 //void MergeData(int array[], int left, int mid, int right, int *temp)
@@ -371,15 +383,14 @@ void QuickSort(int arr[], int i,int j)
 //	_MergeSort(array, 0, size, temp);
 //	free(temp);
 //}
-
-void Merge(int arr[], int left, int mid, int right, int* temp)
+void MegerData(int arr[], int left, int mid, int right, int *temp)
 {
 	int begin1 = left, end1 = mid;
 	int begin2 = mid, end2 = right;
 	int index = left;
-	while (begin1 < end1&&begin2<end2)
+	while (begin1 < end1&&begin2 < end2)
 	{
-		if (arr[begin1]<=arr[begin2])
+		if (arr[begin1] <= arr[begin2])
 		{
 			temp[index++] = arr[begin1++];
 		}
@@ -388,31 +399,36 @@ void Merge(int arr[], int left, int mid, int right, int* temp)
 			temp[index++] = arr[begin2++];
 		}
 	}
-	while (begin1<end1)
+	while (begin1 < end1)
 	{
 		temp[index++] = arr[begin1++];
 	}
-	while (begin2<end2)
+	while (begin2 < end2)
 	{
 		temp[index++] = arr[begin2++];
 	}
 }
-void _MergeSort(int arr[], int left, int right, int* temp)
+void _MegerSort(int arr[], int left, int right, int *temp)
 {
-	while (right - left > 1)
+	if (right - left>1)
 	{
-		int mid = left + (right - left) >> 1;
-		_MergeSort(arr, left, mid,temp);
-		_MergeSort(arr, mid, right, temp);
-		Merge(arr, left, mid, right, temp);
-		memcpy(arr + left, temp + left, sizeof(int)*(right - left));
+		int mid = left + ((right - left) >> 1);
+		_MegerSort(arr, left, mid, temp);
+		_MegerSort(arr, mid, right, temp);
+		MegerData(arr, left, mid, right, temp);
+		memcpy(arr + left, temp + left, (right - left)*sizeof(int));
 	}
+	
 }
-void MergeSort(int arr[], int size)
+void MergeSort(int arr[], int n)
 {
-	int *temp = new int(size);
-	_MergeSort(arr, 0, size, temp);
-	delete temp;
+	int *temp = (int*)malloc(sizeof(arr[0])*n);
+	if (temp == NULL)
+	{
+		return;
+	}
+	_MegerSort(arr, 0, n, temp);
+	free(temp);
 }
 
 
