@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="utf-8"> 
+	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">  
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="renderer" content="webkit">
+<title></title>
+<link rel="stylesheet" href="/static/css/pintuer.css">
+<link rel="stylesheet" href="/static/css/admin.css">
+<script src="/static/js/jquery.js"></script>
+<script src="/static/js/pintuer.js"></script>
+
+</head>
+<body>
+<div class="panel admin-panel">
+  <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>个人信息</strong></div>
+    <form method="post" class="form-x" action="/personnew.html">
+        <div  style="padding-left:20px ;padding-bottom: 20px;">
+            <label>【基本信息】</label>
+        </div>
+        <div class="form-group">
+            <div class="label">
+                <label>工号：</label>
+            </div>
+            <div class="field l10" >
+                <input type="number" class="input w100" value="{{.Id}}" name="Id"  data-validate="required:请输入标题" />
+                <div class="tips"></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="label">
+                <label>姓名：</label>
+            </div>
+            <div class="field l10">
+                <input type="text" class="input w100" value="{{.Name}}" name="Name"  data-validate="required:请输入标题" />
+                <div class="tips"></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="label">
+                <label>职位：</label>
+            </div>
+            <div class="field l10">
+                <input type="text" class="input w50" value="{{.Position}}" name="Position" data-validate="required:请输入标题" />
+                <div class="tips"></div>
+            </div>
+        </div>
+        <ul class="list-inline"  style="padding-left: 40px;  padding-bottom: 25px;">
+            <li>毕业院校:</li>
+            <li style="padding-right: 200px;"><div class="field" >
+                    <input type="text" class="input" name="Graduate_institutions" value="{{.Graduate_institutions}}"  data-validate="required:请输入标题" />
+                </div>
+            </li>
+            <li>性别：</li>
+            <li  style="padding-left:34px;">
+                <div class="field">
+                    <input type="text" class="input"  name="Sex" value="{{.Sex}}" data-validate="required:请输入标题"/>
+                </div>
+            </li>
+        </ul>
+        <ul class="list-inline"  style="padding-left: 40px;  padding-bottom: 25px;">
+            <li>入职时间:</li>
+            <li style="padding-right: 200px;"><div class="field" >
+                    <input type="text" class="input" name="Hiredate" value="{{.Hiredate}}" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})" value=""  data-validate="required:日期不能为空" style="padding:10px!important; height:auto!important;border:1px solid #ddd!important;" />
+                </div>
+            </li>
+            <li>学位：</li>
+            <li  style="padding-left:34px;">
+                <div class="field">
+                    <input type="text" class="input"  name="Degree" value="{{.Degree}}" data-validate="required:请输入标题"/>
+                </div>
+            </li>
+        </ul>
+        <ul class="list-inline"  style="padding-left: 40px;  padding-bottom: 25px;">
+            <li>出生年月:</li>
+            <li style="padding-right: 200px;"><div class="field" >
+                    <input type="text" class="input" name="Birth_time" value="{{.Birth_time}}" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})" value=""  data-validate="required:日期不能为空" style="padding:10px!important; height:auto!important;border:1px solid #ddd!important;" />
+                </div>
+            </li>
+            <li>部门：</li>
+            <li><div class="field">
+                    <input type="text" class="input" name="Department" value="{{.Department}}"  data-validate="required:请输入标题" />
+                </div>
+            </li>
+        </ul>
+        <ul class="list-inline"  style="padding-left: 65px;  padding-bottom: 25px;">
+            <li>电话:</li>
+            <li style="padding-right: 200px;"><div class="field" >
+                    <input type="text" class="input" name="Telephone" value="{{.Telephone}}"  data-validate="required:请输入标题"  />
+                </div>
+            </li>
+            <li>邮箱：</li>
+            <li><div class="field">
+                    <input type="text" class="input" name="Email" value="{{.Email}}"  data-validate="required:请输入标题" />
+                </div>
+            </li>
+        </ul>
+        <ul class="list-inline"  style="padding-left: 40px;  padding-bottom: 25px;">
+            <li>政治面貌:</li>
+            <li style="padding-right: 200px;"><div class="field" >
+                    <input type="text" class="input" name="Politic_status" value="{{.Politic_status}}" data-validate="required:请输入标题" />
+                </div>
+            </li>
+            <li>学历：</li>
+            <li  style="padding-left:34px;">
+                <div class="field">
+                    <input type="text" class="input"  name="Education_background" value="{{.Education_background}}" data-validate="required:请输入标题"/>
+                </div>
+            </li>
+        </ul>
+
+        <div class="form-group">
+            <div class="label">
+                <label>家庭地址：</label>
+            </div>
+            <div class="field l10" >
+                <input type="text" class="input w100" value="{{.Address}}" name="Address" data-validate="required:请输入标题" />
+                <div class="tips"></div>
+            </div>
+        </div>
+
+        <div class="field">
+            <button class="button bg-main icon-check-square-o" type="submit" style="margin-left: 500px;"> 提交</button>
+        </div>
+    </form>
+  </div>
+</div>
+
+</body></html>

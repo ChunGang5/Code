@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="renderer" content="webkit">
+<title></title>
+<link rel="stylesheet" href="/static/css/pintuer.css">
+<link rel="stylesheet" href="/static/css/admin.css">
+<script src="/static/js/jquery.js"></script>
+<script src="/static/js/pintuer.js"></script>
+</head>
+<body>
+    <div class="panel admin-panel">
+        <div class="panel-head"><strong class="icon-reorder">专利列表</strong></div>
+        <div class="padding border-bottom">
+            <ul class="search" style="padding-left:10px;">
+                <li> <a class="button border-main icon-plus-square-o" href="addpatent.html"> 添加内容</a> </li>
+            </ul>
+        </div>
+    </div>
+    <table class="table table-hover text-center"   style="margin-top: 30px;">
+        <tr>
+            <th >专利号</th>
+            <th >专利名称</th>
+            <th >专利所有人</th>
+            <th >专利类型</th>
+            <th >申请日期</th>
+            <th >授权日期</th>
+            <th >是否在续</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+        {{range $v:=.res}}
+            <tr>
+                <th>{{$v.PatentID}}</th>
+                <th>{{$v.PatentName}}</th>
+                <th>{{$v.PatentOwner}}</th>
+                <th>{{$v.PatentType}}</th>
+                <th>{{$v.ApplyDate}}</th>
+                <th>{{$v.GrantDate}}</th>
+                <th>{{$v.Fee}}</th>
+                <th>{{$v.AuditStatus}}</th>
+                <td><div><form action="listpatent.html" method="get">
+                            <button class="button border-main" type="submit" name="PatentID" value="{{$v.PatentID}}" style="padding: 2px 8px;"><span class="icon-edit"></span> 同意</button>
+                        </form>
+                    <form action="listpatent.html" method="post">
+                        <button class="button border-red" type="submit" name="PatentID"  value="{{$v.PatentID}}" style="padding: 2px 8px;" ><span class="icon-trash-o"></span> 移出</button>
+                    </form>
+                    </div>
+                </td>
+            </tr>
+        {{end}}
+    </table>
+</ul>
+
+    <script type="text/javascript">
+    </script>
+</body>
+</html>

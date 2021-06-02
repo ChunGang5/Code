@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="renderer" content="webkit">
+<title></title>
+<link rel="stylesheet" href="/static/css/pintuer.css">
+<link rel="stylesheet" href="/static/css/admin.css">
+<script src="/static/js/jquery.js"></script>
+<script src="/static/js/pintuer.js"></script>
+</head>
+<body>
+    <div class="panel admin-panel">
+   <div class="panel-head"><strong class="icon-reorder">论文列表</strong></div>
+     <div class="padding border-bottom">
+    <ul class="search" style="padding-left:10px;">
+        <li> <a class="button border-main icon-plus-square-o" href="addpaper.html"> 添加内容</a> </li>
+            </ul> 
+    </div>
+    <table class="table table-hover text-center"   style="margin-top: 30px;">
+      <tr>
+        <th >检索号</th>
+        <th >著作名称</th>
+          <th >著作人</th>
+        <th >著作类型</th>
+        <th >学科类别</th>
+          <th >收录情况</th>
+        <th >收录日期</th>
+          <th>状态</th>
+          <th>操作</th>
+      </tr>
+        {{range $v:=.res}}
+            <tr>
+                <th>{{$v.AccessionNum}}</th>
+                <th>{{$v.Title}}</th>
+                <th>{{$v.Author}}</th>
+                <th>{{$v.PeriodicalType}}</th>
+                <th>{{$v.Subject}}</th>
+                <th>{{$v.Collecyion}}</th>
+                <th>{{$v.Date}}</th>
+                <th>{{$v.AuditStatus}}</th>
+                <td><div><form action="listpaper.html" method="get">
+                        <button class="button border-main" type="submit" name="AccessionNum" value="{{$v.AccessionNum}}" style="padding: 2px 8px;"><span class="icon-edit"></span> 同意</button>
+                    </form>
+                    <form action="listpaper.html" method="post">
+                        <button class="button border-red" type="submit" name="AccessionNum"  value="{{$v.AccessionNum}}" style="padding: 2px 8px;" ><span class="icon-trash-o"></span> 移出</button>
+                    </form>
+                    </div>
+                </td>
+            </tr>
+        {{end}}
+    </table>
+  </div>
+<script type="text/javascript">
+
+//搜索
+function changesearch(){	
+		
+}
+
+//单个删除
+function del(id,mid,iscid){
+	if(confirm("您确定要删除吗?")){
+		
+	}
+}
+
+//全选
+$("#checkall").click(function(){ 
+  $("input[name='id[]']").each(function(){
+	  if (this.checked) {
+		  this.checked = false;
+	  }
+	  else {
+		  this.checked = true;
+	  }
+  });
+})
+
+//批量删除
+function DelSelect(){
+	var Checkbox=false;
+	 $("input[name='id[]']").each(function(){
+	  if (this.checked==true) {		
+		Checkbox=true;	
+	  }
+	});
+	if (Checkbox){
+		var t=confirm("您确认要删除选中的内容吗？");
+		if (t==false) return false;		
+		$("#listform").submit();		
+	}
+	else{
+		alert("请选择您要删除的内容!");
+		return false;
+	}
+}
+</script>
+</body>
+</html>

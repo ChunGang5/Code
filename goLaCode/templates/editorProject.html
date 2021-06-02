@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="utf-8"> 
+	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">  
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="renderer" content="webkit">
+<title></title>
+<link rel="stylesheet" href="/static/css/pintuer.css">
+<link rel="stylesheet" href="/static/css/admin.css">
+<script src="/static/js/jquery.js"></script>
+<script src="/static/js/pintuer.js"></script>
+
+</head>
+<body>
+<div class="panel admin-panel">
+  <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>编辑项目</strong></div>
+  <div class="body-content">
+    <form method="post" class="form-x" action="">  
+    	<div  style="padding-left:20px ;padding-bottom: 20px;">
+          <label>【基本信息】</label>
+        </div>
+      <div class="form-group">  	
+        <div class="label">
+          <label>项目编号：</label>
+        </div>
+        <div class="field l10" >
+          <input type="number" class="input w50" value="" name="PID" data-validate="number:请输入内容" />
+          <div class="tips"></div>
+        </div>
+      </div>
+            <div class="form-group">  	
+        <div class="label">
+          <label>项目名称：</label>
+        </div>
+        <div class="field l10">
+          <input type="text" class="input w100" value="" name="PName" data-validate="required:请输入内容" />
+          <div class="tips"></div>
+        </div>
+      </div>
+            <div class="form-group">  	
+        <div class="label">
+          <label>申请人：</label>
+        </div>
+        <div class="field l10">
+          <input type="text" class="input w50" value="" name="Proposer" data-validate="required:请输入内容" />
+          <div class="tips"></div>
+        </div>
+      </div>
+      <ul class="list-inline"  style="padding-left: 28px;  padding-bottom: 25px;">
+	<li>所属学院:</li>
+	<li style="padding-right: 200px;"><div class="field" >
+          <input type="text" class="input" name="College" value="" data-validate="required:请输入内容" />
+       </div>     
+        </li>
+	<li>项目类型：</li>
+	<li  style="padding-right: 200px;"><div class="field">
+            <input type="text" class="input" name="ProType" value="" data-validate="required:请输入内容" />
+        </div>
+        </li>
+</ul>
+<ul class="list-inline"  style="padding-left: 40px;  padding-bottom: 25px;">
+	<li>申请日期:</li>
+	<li style="padding-right: 200px;"><div class="field" >
+            <input type="text" class="input" name="ApplicationDate" value="" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})" value=""  data-validate="required:日期不能为空" style="padding:10px!important; height:auto!important;border:1px solid #ddd!important;" />
+
+       </div>     
+        </li>
+	<li>项目预算：</li>
+	<li><div class="field">
+          <input type="number" class="input" name="ProBudget" value=""  data-validate="number:必须为数字" />
+       </div>     
+        </li>
+</ul>
+
+
+
+    <div  style="padding-left:20px ;padding-bottom: 20px;">
+        <label>【附件信息】</label>
+    </div>
+       <div class="form-group">
+        <div class="label">
+          <label>电子附件：</label>
+        </div>
+        <div class="field">
+          <input type="text" id="url1" name="img" class="input tips" style="width:25%; float:left;"  value=""  data-toggle="hover" data-place="right" data-image="" />
+          <input type="button" class="button bg-blue margin-left" id="image1" value="+ 浏览上传"  style="float:left;">
+          <div class="tipss">*请上传项目相关资料!</div>
+        </div>
+      </div>  
+        <div class="field" style="padding: 5px 35%;">
+          <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+</body></html>

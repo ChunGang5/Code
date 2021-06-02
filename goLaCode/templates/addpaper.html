@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="utf-8"> 
+	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7//static/css/bootstrap.min.css">  
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="renderer" content="webkit">
+<title></title>
+<link rel="stylesheet" href="/static/css/pintuer.css">
+<link rel="stylesheet" href="/static/css/admin.css">
+<script src="/static/js/jquery.js"></script>
+<script src="/static/js/pintuer.js"></script>
+
+</head>
+<body>
+<div class="panel admin-panel">
+  <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>新增论文</strong></div>
+  <div class="body-content">
+    <form method="post" class="form-x" action="">  
+    	<div  style="padding-left:20px ;padding-bottom: 20px;">
+          <label>【基本信息】</label>
+        </div>
+      <div class="form-group">  	
+        <div class="label">
+          <label>刊文题目：</label>
+        </div>
+        <div class="field l10" >
+          <input type="text" class="input w100" value="" name="Title" data-validate="required:请输入标题" />
+          <div class="tips"></div>
+        </div>
+      </div>
+      <div class="form-group">  	
+        <div class="label">
+          <label>刊物类型：</label>
+        </div>
+       <div class="field" style="padding-left: 10px; padding-top: 7px;">
+           <input type="text" class="input w100" value="" name="PeriodicalType" data-validate="required:请输入标题" />
+         </div>
+      </div>
+ <ul class="list-inline"  style="padding-left: 40px;  padding-bottom: 25px;">
+	<li>发表时间:</li>
+	<li style="padding-right: 200px;"><div class="field" >
+          <input type="text" class="input" name="Date" value="" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})" value=""  data-validate="required:日期不能为空" style="padding:10px!important; height:auto!important;border:1px solid #ddd!important;" />
+       </div>     
+        </li>
+	<li>学科类别：</li>
+	<li><div class="field">
+          <input type="text" class="input" name="Subject" value=""  data-validate="required:请输入标题" />
+       </div>     
+        </li>
+</ul>     
+           <div class="form-group">  	
+        <div class="label">
+          <label>收录转载：</label>
+        </div>
+               <div class="field" style="padding-left: 10px; padding-top: 7px;">
+                   <input type="text" class="input w100" value="" name="Collecyion" data-validate="required:请输入标题" />
+               </div>
+      </div>
+      <ul class="list-inline"  style="padding-left: 40px;  padding-bottom: 25px;">
+	<li>ISSN号:</li>
+	<li style="padding-right: 200px;padding-left: 19px;"><div class="field" >
+          <input type="number" class="input" name="AccessionNum" value="" data-validate="number:请输入ISSN号" />
+       </div>
+        </li>
+</ul>
+        <div class="field" style="padding: 5px 35%;">
+            <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+        </div>
+    </form>
+  </div>
+  </div>
+</div>
+
+</body></html>

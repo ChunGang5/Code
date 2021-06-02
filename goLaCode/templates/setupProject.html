@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="renderer" content="webkit">
+<title></title>
+<link rel="stylesheet" href="/static/css/pintuer.css">
+<link rel="stylesheet" href="/static/css/admin.css">
+<script src="/static/js/jquery.js"></script>
+<script src="/static/js/pintuer.js"></script>
+</head>
+<body>
+<form method="post" action="" id="listform">
+  	<div class="panel admin-panel">
+    <div class="panel-head"><strong class="icon-reorder">项目列表</strong></div>
+
+    <table class="table table-hover text-center">
+      <tr>
+        <th>项目编号</th>
+        <th>项目名称</th>
+        <th>项目申请人</th>
+        <th>项目类型</th>
+          <th>所属学院</th>
+        <th>项目预算</th>
+        <th>申请日期</th>
+          <th>结题日期</th>
+        <th>项目状态</th>
+      </tr>
+        {{range $v:=.res}}
+            <tr>
+                <th>{{$v.PID}}</th>
+                <th>{{$v.PName}}</th>
+                <th>{{$v.Proposer}}</th>
+                <th>{{$v.ProType}}</th>
+                <th>{{$v.College}}</th>
+                <th>{{$v.ProBudget}}</th>
+                <th>{{$v.ApplicationDate}}</th>
+                <th>{{$v.ApprovalDate}}</th>
+                <th>{{$v.ProjectStatus}}</th>
+            </tr>
+        {{end}}
+      </tr>
+    </table>
+  </div>
+</form>
+<script type="text/javascript">
+
+//搜索
+function changesearch(){	
+		
+}
+
+//单个删除
+function del(id,mid,iscid){
+	if(confirm("您确定要删除吗?")){
+		
+	}
+}
+
+//全选
+$("#checkall").click(function(){ 
+  $("input[name='id[]']").each(function(){
+	  if (this.checked) {
+		  this.checked = false;
+	  }
+	  else {
+		  this.checked = true;
+	  }
+  });
+})
+
+//批量删除
+function DelSelect(){
+	var Checkbox=false;
+	 $("input[name='id[]']").each(function(){
+	  if (this.checked==true) {		
+		Checkbox=true;	
+	  }
+	});
+	if (Checkbox){
+		var t=confirm("您确认要删除选中的内容吗？");
+		if (t==false) return false;		
+		$("#listform").submit();		
+	}
+	else{
+		alert("请选择您要删除的内容!");
+		return false;
+	}
+}
+</script>
+</body>
+</html>
